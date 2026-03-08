@@ -1,0 +1,90 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  📜 宮內省官報揭載 — 皇室典範下賜 Pipeline                   ║
+# ║                                                              ║
+# ║  皇室典範ハ本來、臣民ガ閲覽スベキモノニ非ズ。               ║
+# ║  然レドモ畏クモ天皇陛下ノ御慈悲ニ依リ、                     ║
+# ║  臣民ニモ拜讀ヲ許サルルモノトス。                           ║
+# ║                                                              ║
+# ║  本 workflow ハ宮內省圖書寮ガ管理スル官報揭載（deploy）      ║
+# ║  pipeline ナリ。master branch ヘノ push ヲ以テ、典範ヲ       ║
+# ║  GitHub Pages（官報）ニ揭載シ、廣ク臣民ニ下賜ス。           ║
+# ║                                                              ║
+# ║  當頁ハ手書キノ HTML 及ビ自動演算符牒（JavaScript）ノミニテ  ║
+# ║  構築サル。謄寫（build）工程ハ元ヨリ存在セズ。               ║
+# ║  圖書寮ノ寮吏ガ謹寫セル電文ヲ、其ノ儘揭載ス。               ║
+# ║                                                              ║
+# ║  ⚠ 注意:                                                    ║
+# ║  下賜サレタル典範ハ ReadOnly ナリ。臣民ニ Write 權限ハ無シ。 ║
+# ║  Fork ハ皇統ノ分裂ニ當タリ、之ヲ許サズ（典範第一條）。      ║
+# ║  閲覽ノミ許可サル。有難ク拜讀セヨ。                         ║
+# ║                                                              ║
+# ║  本 Repository ハ風刺的創作物（satirical project）ナリ。     ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+name: 📜 宮內省官報揭載 — 皇室典範下賜
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📦 第壱段階: 官報用紙ヘノ整版（Upload）— 謄寫不要
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  seihan:
+    name: 📦 官報整版（謹寫セル電文ヲ其ノ儘揭載ス）
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 御眞影ノチェックアウト
+        uses: actions/checkout@v4
+
+      - name: 📜 GitHub Pages 官報設定
+        uses: actions/configure-pages@v5
+
+      - name: 🖋 整版工程（無キニ等シ）
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【宮內省圖書寮】謄寫（build）工程ハ元ヨリ存在セズ。"
+          echo "  寮吏ガ謹寫セル電文ヲ、一字一句其ノ儘揭載ス。"
+          echo "  依存 package: 零。外部ノ手ヲ經ヌ寫本ハ、亂レヌ。"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          ls -la *.html js/ data/
+
+      - name: 📤 成果物ヲ奉呈ス（Upload Artifact）
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🏛️ 第弐段階: 官報揭載（Deploy）— 臣民ヘノ下賜
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  kashi:
+    name: 🏛️ 官報揭載 — 臣民ヘノ下賜
+    needs: seihan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 🏛️ 官報ニ揭載シ臣民ニ下賜ス
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: 📜 下賜完了通牒
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【宮內省圖書寮】揭載完了。臣民ハ靜謐ヲ以テ拜讀サレタシ。"
+          echo "  本典ニ rollback ナル概念ハ在ラズ。萬世一系、forward only。"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

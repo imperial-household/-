@@ -1,0 +1,147 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  🏮 皇宮警察 — 靜謐警衛 Workflow                             ║
+# ║                                                              ║
+# ║  宮內省 皇宮警察部                                           ║
+# ║  Imperial Guard Workflow — 宮警第〇〇壱号                    ║
+# ║                                                              ║
+# ║  根據法令:                                                   ║
+# ║    皇室典範（明治二十二年勅定）第六十二條                     ║
+# ║      「將來此ノ典範ノ條項ヲ改正シ又ハ增補スヘキノ必要アルニ  ║
+# ║       當テハ皇族會議及樞密顧問ニ諮詢シテ之ヲ勅定スヘシ」    ║
+# ║                                                              ║
+# ║  任務:                                                       ║
+# ║    當館ノ靜謐ヲ保ツコト。之ニ盡キル。                       ║
+# ║                                                              ║
+# ║  心得:                                                       ║
+# ║    當部ハ聲ヲ荒ラゲヌ。檢束モ彈壓モ行ハヌ。                 ║
+# ║    唯、御門ノ前ニ立チ、慇懃 niveau 最高ニテ御引取リヲ願フ   ║
+# ║    ノミデアル。特高警察（內務省）ノ流儀ハ當館ニ及バヌ。     ║
+# ║    此處ハ皇居ナレバ。                                        ║
+# ║                                                              ║
+# ║  本 Repository ハ風刺的創作物（satirical project）ナリ。     ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+name: 🏮 皇宮警察 靜謐警衛
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🏮 御門前警衛（PR・Issue ノ靜謐ナル應接）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  gomon-keiei:
+    name: 🏮 御門前警衛
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏮 應接記錄
+        run: |
+          echo "┌──────────────────────────────────────────────────────┐"
+          echo "│  宮警                            宮內省 皇宮警察部  │"
+          echo "│                                                      │"
+          echo "│              應 接 記 錄                             │"
+          echo "│                                                      │"
+          echo "│  來訪者:   ${{ github.actor }}                       │"
+          echo "│  御用向キ: ${{ github.event_name }}                  │"
+          echo "│  應接方針: 慇懃（常時）                              │"
+          echo "└──────────────────────────────────────────────────────┘"
+
+      - name: 🏮 臣民ノ PR ヲ謹ンデ御返却申シ上グ
+        if: github.event_name == 'pull_request_target' && github.event.pull_request.author_association != 'OWNER' && github.event.pull_request.author_association != 'MEMBER'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const 返書 = [
+              "## 🏮 宮內省 皇宮警察部ヨリ 御挨拶",
+              "",
+              `@${context.actor} 樣`,
+              "",
+              "此ノ度ハ、皇室典範ヘノ修正案ヲ御持參下サイマシタ由、",
+              "御足勞ノ程、誠ニ恐縮ニ存ジマス。",
+              "",
+              "然シナガラ、皇室典範ノ改正ハ、皇族會議及ビ樞密顧問ニ諮詢シ、",
+              "勅定ヲ以テ行ハルルモノト定メラレテ居リマス（典範第六十二條）。",
+              "帝國議會スラ關與シ得ヌ手續デアリマスレバ、",
+              "何卒、御事情ヲ御賢察ノ上、御了承賜リタク存ジマス。",
+              "",
+              "御持參ノ案ハ、**開封セズ其ノ儘**、謹ンデ御返却申シ上ゲマス。",
+              "（讀マヌノハ非禮ニ非ズ。讀ム權限ガ當部ニ無イノデアリマス。）",
+              "",
+              "御來訪ノ記錄ハ、皇統譜トハ別ノ帳面ニ、靜カニ殘リマス。",
+              "",
+              "---",
+              "_宮內省 皇宮警察部　拜_",
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: 返書,
+            });
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              state: "closed",
+            });
+
+            console.log("御返却完了。靜謐ハ保タレタリ。");
+
+      - name: 🏮 臣民ノ Issue ニ謹ンデ御返事申シ上グ
+        if: github.event_name == 'issues' && github.event.issue.author_association != 'OWNER' && github.event.issue.author_association != 'MEMBER'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const 返書 = [
+              "## 🏮 宮內省 皇宮警察部ヨリ 御挨拶",
+              "",
+              `@${context.actor} 樣`,
+              "",
+              "御建言、確カニ承リマシタ。",
+              "",
+              "當館ハ皇室典範ノ正本ヲ奉藏スル圖書寮ノ館デアリマシテ、",
+              "御意見ノ受付窓口ヲ持チマセヌ。誤記ノ御指摘ニ限リ、",
+              "圖書寮ガ謹ンデ拜見シ、訂正ノ要否ヲ判斷イタシマス。",
+              "",
+              "本件ハ一旦閉ヂサセテ戴キマスガ、之ハ御建言ノ價値ヲ",
+              "否定スルモノニ非ズ、單ニ當館ニ其ノ權限ガ無イ迄デアリマス。",
+              "",
+              "季節ノ變ハリ目、何卒御自愛下サイマセ。",
+              "",
+              "---",
+              "_宮內省 皇宮警察部　拜_",
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 返書,
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: "closed",
+              state_reason: "not_planned",
+            });
+
+            console.log("御返事完了。靜謐ハ保タレタリ。");
+
+      - name: 🏮 皇族ノ御用ハ素通シ
+        if: github.event.pull_request.author_association == 'OWNER' || github.event.pull_request.author_association == 'MEMBER' || github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER'
+        run: |
+          echo "皇族ノ御通行ナリ。當部ハ御門ヲ開ケ、頭ヲ垂ルルノミ。"
+          echo "（檢査ハ行ハヌ。皇族ヲ檢メルナド、僭越ノ極ミデアル。）"
