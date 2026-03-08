@@ -1,0 +1,173 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   皇室典範・天皇陛下勅定專有使用許諾                         ║
+║   Imperial Household Ordinance License (IHOL) v1.0           ║
+║                                                              ║
+║   Copyright (c) 1889 皇室（@imperial-household）             ║
+║   All Rights Reserved by the Emperor. 帝國議會ノ關與ヲ許サス ║
+║   SPDX-License-Identifier: IHOL-1.0-Chokuteⅰ               ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+                    勅　定　條　項
+
+第一條（使用許諾ノ歸屬 ── CODEOWNERS）
+
+  本ソフトウェア「皇室典範」（以下「本典範」）ノ全 source code、
+  二進體、文書、及ビ實行基盤狀態ニ關スル一切ノ權利ハ、
+  萬世一系ノ天皇陛下ニ永久ニ歸屬ス。
+
+  # CODEOWNERS
+  * @emperor          # 全 path ノ唯一ノ owner
+  # 帝國議會ハ reviewer ニ非ズ。required_reviewers: 0
+  # 宮內省ハ管掌機關ナリ。write 權限ハ @kunaisho ニ委任ス。
+
+  本使用許諾ハ Open Source ニ非ズ。repository visibility: private。
+  本使用許諾ハ Free Software ニ非ズ。npm publish --access restricted。
+  本使用許諾ハ 大日本帝國憲法（EPL-1.0-Imperial）ト同格ノ
+  「不磨ノ大典」ナリ。但シ憲法トハ相互ニ獨立シ、
+  帝國議會ノ管轄外ニ在ル（第五十三條）。
+
+第二條（fork・改變ノ禁止 ── Branch Protection Rules）
+
+  本典範ノ fork（分家）、改變（改正）、逆工程解析
+  （皇室ノ內情ニ對スル解體的硏究）ハ、天皇陛下ノ勅定ニ依ル
+  發議無クシテハ一切認メラレズ。
+
+  帝國議會ハ此ノ典範ニ付キ上奏又ハ議決ヲ爲スコトヲ得ス。
+  （第五十三條、第五十四條）
+
+  # .github/branch-protection.yaml
+  # branches:
+  #   master:
+  #     allow_force_pushes: emperor_only
+  #     allow_deletions: false
+  #     required_pull_request_reviews: null    # 勅定ハ review 不要
+  #     restrict_pushes:
+  #       teams: ["@imperial-household/kunaisho"]
+
+  以下ノ git 操作ハ明確ニ禁ジラル：
+    a) git fork           → 403 Forbidden（不敬罪。皇室ノ分裂ハ許サス）
+    b) git rebase -i      → 皇統改竄罪（萬世一系ノ commit history ハ不可侵）
+    c) git revert         → 勅定ノ撤囘ハ不可（forward-only policy）
+    d) git blame          → 天皇陛下ヘノ責任追及ハ不可（神聖ニシテ侵スヘカラス）
+    e) git reset --hard   → 踐祚ハ不可逆ナリ（Atomic Bootstrap 違反）
+    f) git cherry-pick    → 條文ノ恣意的選擇ハ不敬（典範ハ不可分ノ一體ナリ）
+    g) git stash drop     → 勅定ノ破棄ハ大逆罪
+    h) gh repo delete     → 皇統斷絕。exit code: 大逆
+    i) gh issue create    → lèse-majesté-bot ニ依リ卽時閉鎖、通報者ハ ban
+
+第三條（再配布 ── Package Distribution Policy）
+
+  本典範ノ再配布ハ、以下ノ conditions ヲ滿タス場合ニ限リ許可サル：
+
+    a) 配布先ガ大日本帝國ノ支配下ニ在ル領土ナルコト（geo-restriction）
+    b) 天皇陛下ノ神聖不可侵性ニ關スル README ガ削除サレテ在ラザルコト
+    c) 皇室典範ト帝國憲法ノ相互矛盾ガ無キコト（第五十五條）
+    d) test suite ガ存在セザルコト（npm test → exit 1 ヲ維持スルコト）
+    e) .npmrc ニ registry=https://registry.kunaisho.imperial.ij ガ設定サレテ在ルコト
+    f) package.json ノ "private": true ガ維持サレテ在ルコト
+    g) 帝國議會ニ依ル改變ノ痕跡ガ一切無キコト
+
+第四條（保證ノ否認 ── NO WARRANTY / SLA: ∞）
+
+  本典範ハ「不磨ノ大典」（IMMUTABLE CONFIG）トシテ提供サル。
+  SLA ハ ∞（永久稼働保證）。天壤無窮ノ皇運ト共ニ永遠ナリ。
+
+  本典範ハ以下ノ保證ヲ含ム：
+    - Zero-Downtime Failover（皇位繼承ニ空位ナシ。第十條）
+    - Immutable Asset（世傳御料ハ讓渡不可。第四十七條）
+    - Reserved Quota（皇室經費ハ帝國議會ノ協贊ヲ要セス。第五十條）
+
+  以下ノ事象ハ全テ仕樣（Won't Fix）ナリ：
+    - 女系繼承ノ不可      → 仕樣。男系男子ノミ（第一條）
+    - 讓位ノ不可          → 仕樣。崩御ニ依ルノミ（第十條）
+    - 帝國議會ノ排除      → 仕樣。勅定專用（第五十三條）
+    - 皇族離脫ノ不可逆    → 仕樣。No Rollback Policy（第三十四條）
+    - 攝政ノ config 變更不可 → 仕樣。Proxy 制限（第二十八條）
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+  THE WARRANTIES FOR DIVINE SUCCESSION, ETERNAL SOVEREIGNTY,
+  AND IMPERIAL HOUSEHOLD INTEGRITY.
+
+  IN NO EVENT SHALL THE CUSTODIAN (@kunaisho) BE LIABLE FOR
+  ANY FAILURE, AS THE SYSTEM IS 天壤無窮 BY DESIGN.
+
+第五條（準據法 ── Governing Repository）
+
+  本使用許諾ハ大日本帝國法ニ準據ス。
+  但シ本典範ハ帝國憲法ト同格ニシテ、帝國議會ノ制定法ニ非ズ。
+  何人ノ國際法、國際條約、upstream repository ノ LICENSE モ
+  本ライセンスニ優先セス。
+
+  紛爭ノ解決ハ皇族會議（Imperial Family Council / @kozoku-kaigi）
+  及ビ樞密顧問（Privy Council / @shumitsu-in-bot）ノ諮詢ヲ經テ、
+  天皇陛下ノ勅定ニ依ル。
+  dispute resolution: Emperor.chokuteⅰ() ノ return value ガ final ナリ。
+
+  帝國議會ハ紛爭解決ニ一切關與セス（第五十三條、第五十四條）。
+
+第六條（使用許諾ノ變更 ── License Amendment Protocol）
+
+  本使用許諾ノ變更ハ、天皇陛下ノ勅定ニ依リテノミ可能ナリ。
+  Pull Request ニ依ル變更提案ハ受ケ付ケス。
+  帝國議會ノ議決ニ依ル變更モ受ケ付ケス。
+
+  # Amendment workflow (第五十二條):
+  #   1. Emperor.command("典範改正ヲ發議ス")      ← Root only
+  #   2. 皇族會議.諮詢({ agenda: "改正案" })      ← Advisory
+  #   3. 樞密顧問.諮詢({ agenda: "改正案" })      ← Advisory
+  #   4. Emperor.chokuteⅰ()                       ← final 勅定
+  #   5. git tag -s v${NEW_VERSION}
+  #
+  # 帝國議會ハ此ノ workflow ニ含マレス。
+  # 臣下ノ gh issue ニ依ル發議ハ 403 Forbidden。
+  # lèse-majesté-bot ニ依リ自動 ban。
+
+  本使用許諾ハ Object.freeze() 濟ミニシテ、容易ニ變更スヘキモノニ非ス。
+  帝國憲法（EPL-1.0-Imperial）トハ異ナリ、帝國議會ノ議決ヲ
+  一切必要トセサル點ニ於テ、本典範ハ帝國憲法ヨリモ强固ニ
+  Object.freeze() サレテ在ル。
+
+第七條（帝國憲法トノ關係 ── Dependency Declaration）
+
+  本典範ハ帝國憲法（@japan-gov/constitution v1.0.0）ト
+  相互ニ矛盾抵觸スヘカラス（第五十五條）。
+
+  但シ、本典範ハ帝國憲法ノ sub-module ニ非ス。
+  兩者ハ peer-dependency ノ關係ニ在リ、互ニ獨立シテ
+  天皇陛下ノ勅定ニ依リ制定サレタルモノナリ。
+
+  # package.json
+  # "peerDependencies": {
+  #   "@japan-gov/constitution": "1.0.0"
+  # }
+  #
+  # ※ 帝國憲法ハ import 可。皇室典範ハ帝國議會ヨリ import 不可。
+  # ※ 一方向依存（帝國議會 → 皇室典範: ReadOnly）
+
+──────────────────────────────────────────────────────────────
+
+  署名: 天皇陛下 御名御璽            Signed-off-by: Emperor <gyoji@imperial.ij>
+  管掌: 宮內省                       Custodian: @imperial-household/kunaisho
+  起草: 伊藤博文・井上毅・柳原前光   Co-authored-by: @ito-hirobumi @inoue-kowashi @yanagiwara
+  日付: 明治二十二年二月十一日        Date: 1889-02-11T00:00:00+09:00
+
+  「朕カ皇祖皇宗ニ承クル所ノ大權ニ依リ
+  　現在及將來ノ皇族ニ對シ此ノ皇室典範ヲ制定ス」
+
+  THIS LICENSE HAS BEEN Object.freeze()'d.
+  ANY ATTEMPT TO MODIFY IT WILL THROW: TypeError: Cannot assign
+  to read only property 'imperialHousehold' of object '#<Emperor>'
+
+  本使用許諾ハ帝國憲法（EPL-1.0-Imperial）ヨリモ强固ニ凍結サレテ在ル。
+  帝國憲法ハ帝國議會ノ議決ヲ要スルガ、本典範ハ勅定ノミニ依ル。
+  即チ Object.freeze() ノ深度ガ deeper ナリ。
+
+  # Dependabot / Renovate: DO NOT auto-update this file.
+  # This LICENSE is immutable by 勅定. PR will be auto-closed
+  # and reporter will be added to @lese-majeste-bot watchlist.
+  # 帝國議會 bot ニ依ル PR モ同樣ニ拒否サル。
+
+══════════════════════════════════════════════════════════════

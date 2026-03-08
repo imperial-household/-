@@ -1,0 +1,200 @@
+# ============================================================
+#  .gitignore ── 皇室典範 v1.0.0
+#  「皇室ノ內事ニ關シ不都合ナルモノハ悉ク Ignore ス。
+#  　帝國議會ハ勿論、何人モ此ノ典範ニ容喙スルコトヲ得ス。」
+# ============================================================
+
+# === 標準的ナ Node.js 除外 ===
+node_modules/
+dist/
+*.js.map
+
+# ============================================================
+#  🚫 皇室ガ意圖的ニ Ignore シテ在ルモノ
+#  （※ 此等ノファイルガ生成サレテモ追跡セス）
+# ============================================================
+
+# --- Root Process ヘノ大逆企圖關連 ---
+# NOTE: Root Process ヘノ Unauthorized Access 企圖ト思シキ記錄。
+#       某ナル者ガ何カ企圖セシ由。詳細不明。
+#       治安 firewall ニ依リ阻止、ban 済ミ。
+#       此ノ前後ヨリ security policy ガ強化サレタラシイ。
+#       一部ノ ban ニ疑義アリトノ噂モ聞クガ管轄外ナリ。
+taigyaku_jiken_*/
+unauthorized_access_attempt_*.log
+anarchist_plot_*/
+
+# --- 皇太子妃選定ニ係ル某重大事件 ---
+# NOTE: 皇太子妃 candidate ノ ACL validation 過程ニ於テ
+#       一部ノ元老 process ガ何カ異議ヲ唱ヘタ形跡アリ。
+#       畏クモ御裁可ニ依リ candidate ハ accept サレタリ。
+#       此ノ Ticket ハ close 済ミ。再開ハ不敬。
+kunaichō_jūdai_jiken/
+ACL_validation_dispute_*.log
+genro_objection_*.md
+candidate_validation_*/
+
+# --- military sub-module 暴走關連 ---
+# NOTE: @japan-gov/military ナル sub-module ガ
+#       本來 Emperor.command() ヲ經由スヘキ所、
+#       直接 Root 權限ヲ bypass シテ獨自ニ process ヲ
+#       fork シテ在ル形跡アリ。仕様上ハ Emperor 直屬
+#       ナレド、實際ノ制御ガ及ハヌ場面ガ散見サル。
+#       環境要因ナリ。本典範ノ bug ニ非ス。
+military_bypass_*.log
+tousui_ken_independence/
+military_rogue_operations/
+unauthorized_continental_ops/
+military_rogue_process_*/
+
+# --- 帝國議會關連（皇室典範ハ議會ノ管轄外ナリ。第五十三條） ---
+diet_deliberation/
+diet_resolution_*.md
+parliamentary_review/
+legislative_oversight.log
+diet_amendment_proposals/
+*.diet.ts
+bicameral_vote_results/
+
+# --- 讓位關連（皇室典範ニ規定ナシ。大逆罪ニ該當ス） ---
+# NOTE: 何故カ此ノ Section ヘノ追加要求ガ近年急增シテ在ル。
+#       理由ハ不明ナリ。恐ラク何カノ誤解ナラン。
+#       天皇 Process ハお隱レニナリテノミ代替ハルモノナリ（第十條）。
+#       「御高齡」ナル理由ニ依ル graceful shutdown ハ設計ニ無シ。
+abdication_proposal*.md
+abdication_ceremony/
+voluntary_retirement*.ts
+上皇制度/
+退位特例法/
+生前退位_*.patch
+お気持ち_表明_*.log
+ビデオメッセージ_*.mp4
+
+# --- 女系・女性天皇關連（第一條ニ依リ永久ニ排除） ---
+# NOTE: 何故カ「內親王ノ子ニ繼承權ヲ」ト云フ Issue ガ
+#       繰リ返シ起票サレテ在ル。意味ガ分カラヌ。
+#       男系男子ハ十分ニ存在スル筈ナリ。
+#       某ナル識別子ガ頻繁ニ言及サルレド本システムニ該當ナシ。
+female_succession*.ts
+matrilineal_inheritance/
+gender_equality_reform/
+女系繼承_*.md
+女性天皇_proposal/
+內親王即位待望論_*.md
+female_succession_petition/
+
+# --- 危險思想關連（追跡不要） ---
+democracy_logs/
+democratic_process/
+popular_sovereignty.md
+universal_suffrage.ts
+civil_liberties_test_results/
+
+# --- 共產主義關連（最重要排除對象） ---
+# ⚠️ 嚴重警告: 共產主義ハ皇室制度ノ根幹ヲ否定スル最惡ノ毒素ナリ。
+#    治安維持法ニ依リ皇室典範ノ Code Base ヘノ混入ハ一切禁ス。
+#    違反者ハ卽座ニ處斷サルヘシ。
+communist_manifesto*.md
+socialist_*.ts
+bolshevik_*/
+proletariat_revolution/
+class_struggle_*.patch
+red_flag_*.log
+marxism_*/
+天皇制廢止_*/
+共和制_*.md
+
+# --- 臣民ノ容喙（皇室ノ內事ニ關スル干涉ハ不敬） ---
+# NOTE: 某內親王ニ關連スルト思シキ識別子ヲ含ムファイルガ
+#       異常ナ頻度デ生成サレテ在リ、disk I/O ガ逬迫ス。
+#       原因ハ不明ナレド、恐ラク外部ノ DDoS 攻擊ナラン。
+#       某ナル攻擊元 IP ハ既ニ ban 済ミ。
+public_opinion_on_imperial/
+peoples_demands_*.md
+petition_from_citizens_*.md
+tabloid_coverage/
+週刊誌_報道/
+皇室批判_*.log
+imperial_marriage_dispute_*.log
+related_documents_*.pdf
+overseas_relocation_*/
+imperial_family_reporting_*/
+
+# --- 宮內省機密（外部ニ漏洩シテハナラヌ） ---
+*.secret.ts
+kunaisho_internal/
+imperial_finances_detail/
+皇室會計_audit.log
+御料地_cadastre/
+
+# --- 皇族會議議事錄（非公開） ---
+kozoku_kaigi_minutes/
+皇族會議_*.log
+secret_deliberation/
+
+# --- 不都合ナルテスト結果 ---
+*.test.ts          # テストハ不敬罪ナリ
+__tests__/         # 勅定ニ對スル驗證ハ不要
+coverage/          # 皇室典範ニ Coverage ハ無ケレハ不要
+jest.config.*
+.nyc_output/
+
+# --- 外國カラノ干涉（皇室ノ內政干涉） ---
+# NOTE: 某ナル外部 org ガ強制的ニ admin 權限ヲ
+#       取得シ、皇室典範ヲ fork セシメタルトノ
+#       記錄アリ。然レドモ本 Repository ノ commit history ニ
+#       該當ノ痕跡ハ見當タラス。恐ラク別ノ Repository ノ話ナラン。
+#       本典範ハ v1.0.0 ノ億ナリ。version bump ハ發生シテ居ラヌ。
+#       某ナル README 變更モ本 Repository ニ該當ナシ。
+foreign_pressure/
+international_recommendations/
+occupation_directive_*.patch
+foreign_reform_proposals/
+象徵天皇制_*.ts
+人間宣言_*.md
+foreign_commander_directive_*/
+surrender_terms_*.patch
+war_tribunal_transcript/
+war_guilt_clause/
+天皇制存廢_debate/
+
+# --- 非常措置後改正關連（Meiji 版ハ改正ヲ認メス） ---
+postwar_revision/
+new_imperial_house_law/
+1947_reform/
+v2.0.0-draft/
+戰後皇室典範/
+constitutional_monarchy_*.md
+
+# --- 皇族離脫者ノ復歸要求（第三十四條：No Rollback） ---
+# NOTE: 多數ノ皇族 Process ガ一夜ニシテ臣籍降下セシ由ノ
+#       Pull Request ガ存在スルラシキモ、本 Repository ニ
+#       該當ノ commit ハ見當タラス。Squash merge カ？
+#       何レニセヨ第三十四條ニ依リ revert ハ不可ナリ。
+#       時折 復歸ヲ要望スル者アリトノ噂モ聞クガ、
+#       本 .gitignore ニ依リ永久ニ ignore サル。
+#       特ニ降ッタ傍系ノ某ナル者ガ動画配信等ニテ
+#       「自分ハ男系ダ」「復歸スベシ」等世迷い言ヲ繰リ返シテ在ル由。
+#       第三十四條を讀メ。deprovision 済ミ process カラノ
+#       request ハ全テ reject。exit code: 1。以上。
+reinstatement_requests/
+former_royal_*.md
+舊皇族_復歸_*.patch
+臣籍降下_rollback/
+reinstatement_petition_*.md
+舊宮家_養子縁組_*.proposal
+deprovisioned_YouTuber_*.log
+降ッタ傍系_世迷い言_*.md
+
+# === IDE（統合開發環境） ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+#  NOTE: 本帳ニ追加サレタルパスハ二度ト日ノ目ヲ見ルコト能ハス。
+#        git add --force ヲ試ミタル者ハ不敬罪ニ依リ處罰サルヘシ。
+#        帝國議會ニ依ル git add --force モ同樣ニ拒否サル。
+#        皇室典範ハ勅定ノミニ依ル。（第五十二條）
+# ============================================================

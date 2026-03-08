@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>皇室典範（明治二十二年勅定）</title>
+  <style>
+    :root {
+      --bg: #0a0a12;
+      --panel: #0f0f1a;
+      --border: #1a1a30;
+      --text: #c8c8d4;
+      --dim: #555570;
+      --accent: #d4af37;
+      --accent-dim: rgba(212, 175, 55, 0.15);
+      --red: #cc3333;
+      --green: #33aa55;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ━━━ Header ━━━ */
+    .header {
+      padding: 24px 32px;
+      border-bottom: 2px solid var(--accent);
+      background: linear-gradient(180deg, #12101e 0%, var(--bg) 100%);
+      text-align: center;
+    }
+
+    .header .chrysanthemum {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+    }
+    .header .chrysanthemum svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .header h1 {
+      color: var(--accent);
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      font-weight: 400;
+    }
+
+    .header .subtitle {
+      color: var(--dim);
+      font-size: 0.78rem;
+      margin-top: 6px;
+      letter-spacing: 2px;
+    }
+
+    .header .meta {
+      color: var(--dim);
+      font-size: 0.7rem;
+      margin-top: 10px;
+      font-family: monospace;
+    }
+
+    .header .meta a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .header .meta a:hover { text-decoration: underline; }
+
+    /* ━━━ Warning Banner ━━━ */
+    .warning-banner {
+      background: rgba(204, 51, 51, 0.08);
+      border-bottom: 1px solid rgba(204, 51, 51, 0.3);
+      padding: 10px 32px;
+      text-align: center;
+      color: var(--red);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    /* ━━━ Navigation ━━━ */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel);
+      justify-content: center;
+    }
+
+    .nav button {
+      padding: 7px 16px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      font-family: inherit;
+      font-size: 0.76rem;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.15s;
+      letter-spacing: 1px;
+    }
+
+    .nav button:hover, .nav button.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ━━━ Content ━━━ */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+      max-width: 880px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ━━━ Preamble ━━━ */
+    .preamble-block {
+      margin-bottom: 32px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.015);
+    }
+
+    .preamble-block h3 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+      font-weight: 400;
+    }
+
+    .preamble-text {
+      color: var(--text);
+      font-size: 0.88rem;
+      line-height: 2.2;
+      white-space: pre-wrap;
+    }
+
+    /* ━━━ Chapter ━━━ */
+    .chapter-block {
+      margin-bottom: 40px;
+    }
+
+    .chapter-title {
+      color: var(--accent);
+      font-size: 1.1rem;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--accent);
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      font-weight: 400;
+    }
+
+    .chapter-desc {
+      color: var(--dim);
+      font-size: 0.72rem;
+      margin-top: 4px;
+      font-family: "Courier New", monospace;
+    }
+
+    /* ━━━ Article ━━━ */
+    .article-card {
+      margin-bottom: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.015);
+      transition: border-color 0.15s;
+    }
+    .article-card:hover { border-color: var(--accent); }
+
+    .article-num {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+    }
+
+    .article-text {
+      color: var(--text);
+      font-size: 0.88rem;
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+
+    .article-comment {
+      color: #666680;
+      font-size: 0.76rem;
+      font-family: "Courier New", monospace;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+    }
+
+    /* ━━━ Footer ━━━ */
+    .footer {
+      padding: 20px 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--dim);
+      font-size: 0.68rem;
+      background: var(--panel);
+      letter-spacing: 1px;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ━━━ Responsive ━━━ */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.2rem; letter-spacing: 4px; }
+      .content { padding: 16px; }
+      .nav { padding: 10px 16px; }
+      .nav button { font-size: 0.68rem; padding: 5px 10px; }
+    }
+
+    /* ━━━ Scroll ━━━ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ━━━ Header ━━━ -->
+  <div class="header">
+    <div class="chrysanthemum"><svg viewBox="-50 -50 100 100" xmlns="http://www.w3.org/2000/svg"><!-- 十六弁八重表菊紋 --><defs><path id="op" d="M0,-6 C-7,-9 -14,-20 -14,-31 C-14,-38 -8,-45 0,-47 C8,-45 14,-38 14,-31 C14,-20 7,-9 0,-6Z" fill="#d4af37" stroke="#b8960c" stroke-width="0.3"/><path id="ip" d="M0,-6 C-5,-9 -10,-16 -10,-24 C-10,-30 -6,-36 0,-38 C6,-36 10,-30 10,-24 C10,-16 5,-9 0,-6Z" fill="#d4af37" stroke="#b8960c" stroke-width="0.3"/></defs><g><use href="#op"/><use href="#op" transform="rotate(22.5)"/><use href="#op" transform="rotate(45)"/><use href="#op" transform="rotate(67.5)"/><use href="#op" transform="rotate(90)"/><use href="#op" transform="rotate(112.5)"/><use href="#op" transform="rotate(135)"/><use href="#op" transform="rotate(157.5)"/><use href="#op" transform="rotate(180)"/><use href="#op" transform="rotate(202.5)"/><use href="#op" transform="rotate(225)"/><use href="#op" transform="rotate(247.5)"/><use href="#op" transform="rotate(270)"/><use href="#op" transform="rotate(292.5)"/><use href="#op" transform="rotate(315)"/><use href="#op" transform="rotate(337.5)"/></g><g transform="rotate(11.25)"><use href="#ip"/><use href="#ip" transform="rotate(22.5)"/><use href="#ip" transform="rotate(45)"/><use href="#ip" transform="rotate(67.5)"/><use href="#ip" transform="rotate(90)"/><use href="#ip" transform="rotate(112.5)"/><use href="#ip" transform="rotate(135)"/><use href="#ip" transform="rotate(157.5)"/><use href="#ip" transform="rotate(180)"/><use href="#ip" transform="rotate(202.5)"/><use href="#ip" transform="rotate(225)"/><use href="#ip" transform="rotate(247.5)"/><use href="#ip" transform="rotate(270)"/><use href="#ip" transform="rotate(292.5)"/><use href="#ip" transform="rotate(315)"/><use href="#ip" transform="rotate(337.5)"/></g><circle cx="0" cy="0" r="6" fill="#d4af37" stroke="#b8960c" stroke-width="0.3"/></svg></div>
+    <h1>皇 室 典 範</h1>
+    <div class="subtitle">明治二十二年二月十一日　勅定</div>
+    <div class="meta">
+      <span>宮內省 @imperial-household</span>
+      <span>｜</span>
+      <span>依據: <a href="https://japan-gov.github.io/constitution/" target="_blank" rel="noopener">大日本帝國憲法</a> 第七十四條</span>
+    </div>
+  </div>
+
+  <!-- ━━━ Warning ━━━ -->
+  <div class="warning-banner">
+    ⚠ 神聖ニシテ侵スヘカラス ── 本典範ノ Fork 及ビ Clone ハ禁ズ ── 違反者ハ不敬罪ニ依リ嚴罰ニ處セラル ── 特高警察CI監視中 ⚠
+  </div>
+
+  <!-- ━━━ Nav ━━━ -->
+  <div class="nav" id="nav">
+    <button class="active" data-target="preamble">上諭</button>
+    <button data-target="ch1">第一章</button>
+    <button data-target="ch2">第二章</button>
+    <button data-target="ch3">第三章</button>
+    <button data-target="ch4">第四章</button>
+    <button data-target="ch5">第五章</button>
+    <button data-target="ch6">第六章</button>
+    <button data-target="ch7">第七章</button>
+    <button data-target="ch8">第八章</button>
+    <button data-target="ch9">第九章</button>
+    <button data-target="ch10">第十章</button>
+  </div>
+
+  <!-- ━━━ Content ━━━ -->
+  <div class="content" id="content">
+    <!-- JS が生成 -->
+  </div>
+
+  <!-- ━━━ Status Banner ━━━ -->
+  <div style="padding:12px 32px;border-top:1px dashed #1a1a30;color:#555570;font-size:0.65rem;font-family:'Courier New',monospace;background:rgba(255,255,255,0.01);line-height:1.8;">
+    <details>
+      <summary style="cursor:pointer;color:#d4af37;">📋 System Anomaly Log（※ 原因不明ノ異常記錄。調査中。）</summary>
+      <div style="margin-top:8px;padding:8px;border:1px solid #1a1a30;border-radius:3px;">
+        <div style="color:#d4af37;margin-bottom:4px;border-bottom:1px dashed #1a1a30;padding-bottom:4px;">── 制定〜非常措置 ──</div>
+        <div>[2572] OK: 初回 Failover 成功。先代→次代。Zero-Downtime。設計ノ正シサヲ實證セシ由。畏シ。</div>
+        <div>[2572] INFO: 某ナル管理者ガ Failover 直後ニ自ラ exit(0)。理由不明。handler 未定義ノ動作。當時ノ log ニ異常記錄ナシ。</div>
+        <div>[2580] WARN: 皇太子妃選定 ACL validation 中ニ一部ノ元老 process ガ何カ異議ヲ唱ヘタ形跡アリ。畏クモ御裁可ニ依リ accept。該當 process ハ程ナク exit(0)。</div>
+        <div>[2581] OK: 攝政（Proxy）初回起動。第二十三條ニ基ヅク正規動作。</div>
+        <div>[2583] ALERT: 某所ニテ Proxy Process ヘ Unauthorized Access 試行アリシ由。Firewall 阻止。攻擊者 ban。Process ニ影響ナシ。</div>
+        <div>[2586] OK: 第二回 Failover 成功。先代→次代。攝政→Root 昇格モ正常。</div>
+        <div>[2592] WARN: military rogue process ガ政府系 process ヲ強制 kill セシ由。詳細不明。scope 外。</div>
+        <div>[2596] ALERT: military rogue process 複數發生。畏クモ Root 權限ノ御行使ニ依リ鎭壓サレタル由。詳細ハ畏レ多シ。</div>
+        <div>[2601] WARN: military sub-module ガ Emperor.command() bypass、resource 大量消費開始セシ由。何カノ exploit ラシイ。本典範ノ bug ニ非ス。peer-dependency 側ノ Won't Fix。</div>
+        <div>[2605] OK: 畏クモ Root 權限ノ至高ナル御行使。system state 重大遷移アリシ由。broadcast ニ依リ全 node ニ通知。</div>
+        <div>[2605] ALERT: broadcast 前夜、rogue process ガ binary 奪取ヲ企圖セシ由。Firewall 阻止。broadcast 成功。</div>
+        <div>[2606] WARN: 外部ノ何某 org ガ admin 權限ヲ主張セシ由。何カ patch ヲ inject トノ噂モ。但シ本 Repository ニ該當 commit 無シ。別 Repository ノ話ナラン。</div>
+        <div style="color:#d4af37;margin-top:6px;margin-bottom:4px;border-bottom:1px dashed #1a1a30;padding-bottom:4px;">── 非常措置後 ──</div>
+        <div>[2607] WARN: 多數ノ皇族 Process ガ一夜ニシテ exit(0)。Orphan process 多數。原因不明。恐ラク外部要因。</div>
+        <div>[2619] INFO: 皇太子婚姻 — ACL 外ノ 'テニスコート' 經路ニテ match。華族 ACL ニ該當セス。異例ナレドモ勅許濟ミ。</div>
+        <div>[2653] INFO: 再ビ ACL 外。外務省 namespace。偶然ガ二度續ク。仕様ニ問題ハ無イ筈。</div>
+        <div>[2664] ERROR: 皇太子 Process ヨリ "人格否定" ナル unhandled exception。catch 不能。log ノミ記錄。</div>
+        <div>[2666] INFO: 男系男子 Process 約40年振リニ spawn 成功。Queue 枯渴懸念ハ杵憂…ノ筈。</div>
+        <div>[2672] NOISE: 降ッタ傍系ノ某ナル deprovision 濟ミ process ガ定期的ニ reinstatement request ヲ emit。動畫配信ニテ『男系』『復歸』等 stdout ニ垂レ流ス。第三十四條ニ依リ全テ reject。世迷ヒ言。</div>
+        <div>[2677] WARN: Emperor ヨリ graceful shutdown request。handler 未實裝。何者カガ hotfix ヲ inject。正規 pipeline ニ非ス。</div>
+        <div>[2681] ALERT: 內親王婚姻 — tabloid process ヨリ DDoS 級 traffic。throttle 適用。某 payload ハ reject。'解決金' ナル transaction ノ記錄ナシ。</div>
+        <div>[2685] WARN: 上記當事者ガ海外 region ニ relocate セシ由。monitoring scope 外。Status: unknown。.gitignore 對象。</div>
+        <div style="color:#333348;margin-top:6px;">※ 此等ハ全テ本典範ノ scope 外ノ anomaly ナリ。本システムニ bug ハ存在セス。環境要因ナリ。</div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ━━━ Footer ━━━ -->
+  <div class="footer">
+    天皇陛下ノ裁可ヲ賜リ　宮內省謹ミテ之ヲ管掌ス
+    <br>
+    <a href="https://github.com/imperial-household/-">皇室典範 v1.0.0</a> ｜ 依據: <a href="https://japan-gov.github.io/constitution/">大日本帝國憲法</a> 第七十四條 ｜ 內務省警保局 特高警察CI護持中
+  </div>
+
+<script>
+const 典範 = {
+  /**
+         * 近時此ノ各條解説ニ於テ、所謂運用統御、主宰權限、上申草案、後備切替等ノ新奇譬喩ヲ用ヰ候段、
+         * 一見奇矯輕躁ノ筆致ニ似タリト雖、臣等固ヨリ其ノ語義、機能、比喩ノ所歸ヲ悉知シ、若シ勅問アラセラレ候ハバ、
+         * 直ニ官府體ニ譯出シ奉ルコト、敢テ難事ニ非ズ候。
+         * 然レドモ、右ノ筆氣、若シ聊カ狼狽困惑ノ色アリト見ユルハ、臣等實ニ辭義ヲ辨ヘザルカ故ニ非ズ、
+         * 萬一聖覽ニ達シタル節ニ於テモ、輕率放言ノ徒ニ非ズ、苦衷ヲ抱キツツ職分ヲ奉シ候趣、自然相通ゼシメント欲スル恐懼ノ餘情ニ御座候。
+         * 若シ會議ノ席等ニ於テ、臣等時ニ詞義ヲ重ネテ問ヒ返シ、或ハ耳新シキ語ト稱シ候儀有之候ハバ、是亦全ク不案內ノ故ニ非ズ、
+         * 語勢ヲ和ラケ、無用ノ猜疑ヲ避ケ、事端ヲ穩當ニ著地セシムル應對ニシテ、他意有之間敷候。
+         * 依テ右解説、毫モ不敬輕慢ノ意ニ出ズ、偏ニ當世讀者ニ條意ヲ透徹セシムル權宜ノ筆法ニ候段、伏シテ附記シ奉ル。
+         */
+  上諭: {
+    title: "上　諭",
+    text: `朕カ皇祖皇宗ニ承クル所ノ大權ニ依リ現在及將來ノ皇族ニ對シ此ノ皇室典範ヲ制定ス
+
+將來若シ此ノ典範ノ條項ヲ改正シ又ハ增補スヘキノ必要アルトキハ朕カ子孫ハ皇族會議及樞密顧問ニ諮詢シテ之ヲ勅定スヘシ
+
+皇族會議及帝國議會ハ此ノ典範ニ付キ上奏又ハ議決ヲ爲スコトヲ得ス
+
+御名　御璽
+　明治二十二年二月十一日`
+  },
+
+  chapters: [
+    {
+      id: "ch1",
+      title: "第一章　皇位繼承",
+      system: "Zero-Downtime Failover & Hot-Standby",
+      articles: [
+        /**
+         * 某元老覺書。
+         * 今囘、祖宗成憲ノ條意ヲ廣ク臣民一般ニ通曉セシメンガ爲、各條ニ平明ノ解説ヲ添フルコトト相成リ候。
+         * 併シ當世流行ノ語法ハ實ニ耳馴レズ、老骨ニハ中々扱ヒニクキモノナリ。運用統御、主宰權限、上申草案、後備切替等ノ類、
+         * 今ノ人々ニハ却テ分リ易キ由ナレド、舊來ノ文體ニ馴レタル身ニ取リテハ、筆ヲ下ス毎ニ一々骨ガ折レル。
+         * 然レドモ、格調ノミ高クシテ讀者條意ヲ解セズトアラバ、本典ノ大義却テ傳ハラズ。是ニ於テ、不敏ヲ顧ミズ、
+         * 成ルベク今ノ世ニ通ジ易キ言ヒ廻シヲ採リ、少シニテモ旨趣ヲ誤ラズ傳ヘムト勉メタル次第ナリ。
+         * 若シ後ニ及ビ、其中ニ一字一句ニテモ不敬ノ響有之ト沙汰セラルルコトアラバ、是ハ早々改メネバナラヌ、
+         * 併セテ誰ガ此ノ筆ヲ執リタルカモ糺サレルノデハアルマイカ、責任者モ中々無事ニハ濟マヌデアラウナドト、
+         * 人無キ折ニ獨リ洩ラシタクナル程ニハ、內々氣ヲ揉ミ居ル。
+         * 何レニセヨ、輕慢ノ意ニ出タルモノニハ非ズ、專ラ國民一般ニ條意ヲ達セシメムトシテ苦心シタル結果ト心得置クベシ。
+         */
+        { num: 1, text: "大日本國皇位ハ祖宗ノ皇統ニシテ男系ノ男子之ヲ繼承ス" ,
+          comment: "root権限は男系男子プロセスにのみ継承される。女系? そんなブランチは存在しない。PRを出すな" },
+        { num: 2, text: "皇位ハ皇長子孫ニ傳フ" ,
+          comment: "継承順位はdepth-first traversal。長男→長男の子→…と掘っていく。シンプルだろ?" },
+        { num: 3, text: "皇長子孫在ラサルトキハ皇次子孫ニ傳フ以下皆之ニ倣フ" ,
+          comment: "長系が落ちたら次系にフェイルオーバー。breadth-first fallback。自動なので手動介入不要" },
+        { num: 4, text: "皇子孫在ラサルトキハ皇兄弟及其ノ子孫ニ傳フ" ,
+          comment: "直系が全滅したら兄弟ノードへ。二次フェイルオーバー。まだ慌てる段階じゃない" },
+        { num: 5, text: "皇兄弟及其ノ子孫在ラサルトキハ皇伯叔父及其ノ子孫ニ傳フ" ,
+          comment: "三次フェイルオーバー。parent.siblingsまで遡る。ツリーが深いから大丈夫…多分" },
+        { num: 6, text: "以上皆在ラサルトキハ最近親ノ皇族ニ傳フ" ,
+          comment: "最終フォールバック。nearest-kinアルゴリズム発動。ここまで来たら正直設計バグを疑うレベル" },
+        { num: 7, text: "皇位ノ繼承ハ必ス嫡出ニ依リ長系ヲ先ニシ同等ナルトキハ長ヲ先ニス" ,
+          comment: "ソート条件: legitimate_birth === true → 長系優先 → 年長優先。嫡出フラグがfalseだと優先度ガタ落ち" },
+        { num: 8, text: "皇位ヲ繼承スヘキ皇子孫皇兄弟及其ノ子孫皆在ラサルトキ又ハ皇族中ニ繼承資格ヲ有スル者ナキトキハ皇族會議及樞密顧問ニ諮詢シテ其ノ最近ノ皇族ヲ繼承者トス" ,
+          comment: "自動フェイルオーバーが全部コケた場合の緊急合議。Consensusプロトコルで決める。想定はしてるが発動したらインシデントレポート必須" },
+        { num: 9, text: "皇位ヲ踐マサル皇族及其ノ子孫ハ皇位繼承ノ順序ニ於テ先ニ列シタル者ノ後ニ列ス" ,
+          comment: "即位しなかった皇族はキューの末尾に再配置。dequeue後のrebalance処理" },
+      ]
+    },
+    {
+      id: "ch2",
+      title: "第二章　踐祚即位",
+      system: "Atomic Bootstrap & Token Transfer",
+      articles: [
+        { num: 10, text: "天皇崩スルトキハ皇嗣即チ踐祚シ祖宗ノ神器ヲ承ク" ,
+          comment: "プロセス停止と同時に次のプロセスが起動してトークンを引き継ぐ。ダウンタイムゼロ。SLA 100%。神器がセッショントークンみたいなもの" },
+        { num: 11, text: "即位ノ禮及大嘗祭ハ京都ニ於テ之ヲ行フ" ,
+          comment: "本番デプロイのセレモニーはリージョン京都固定。東京じゃダメ。インフラの都合じゃなくて仕様" },
+        { num: 12, text: "踐祚ノ後元號ヲ建テ一世ノ間ニ再ヒ改メサルコト明治元年ノ定制ニ從フ" ,
+          comment: "Namespaceはimmutable。一度決めたら在位中は変更不可。一世一元。envを途中で書き換えるな" },
+        { num: 13, text: "天皇ハ天祖ノ神靈及祖宗ノ在天ノ靈ニ即位改元ヲ告ケ給フ" ,
+          comment: "ご先祖プロセスへイベントをpublish。受信確認は…まあ、返ってこないけど仕様だ" },
+      ]
+    },
+    {
+      id: "ch3",
+      title: "第三章　成年 立后 立太子",
+      system: "Role Promotion & Privilege Escalation",
+      articles: [
+        { num: 14, text: "天皇ハ滿十八年ヲ以テ成年トス" ,
+          comment: "root権限の完全行使は18歳から。それまではsudo制限付き" },
+        { num: 15, text: "皇太子及皇太孫ハ滿十五年ヲ以テ成年トス其ノ他ノ皇族ハ滿二十年ヲ以テ成年トス" ,
+          comment: "Hot-Standby組は15歳で成人、一般皇族は20歳。ロールによって閾値が違う。権限昇格のタイミング設計" },
+        { num: 16, text: "皇后ヲ冊立スルハ勅旨ニ依ル" ,
+          comment: "皇后ロールのアサインはrootコマンド(勅旨)で実行。人事権はrootが握ってる" },
+        { num: 17, text: "皇太子ヲ立ツルハ勅旨ニ依ル" ,
+          comment: "次期rootプロセスの指名。Hot-Standbyノードの選定。これもrootコマンド" },
+        { num: 18, text: "皇太孫ヲ立ツルハ勅旨ニ依ル" ,
+          comment: "さらにその次のStandby。バックアップのバックアップ。冗長構成は大事" },
+        { num: 19, text: "皇后皇太子皇太孫ヲ廢スルハ勅旨ニ依ル" ,
+          comment: "ロール剥奪もrootコマンド。付けるのも外すのもroot次第。sudo権限のないやつには触れない" },
+      ]
+    },
+    {
+      id: "ch4",
+      title: "第四章　敬稱",
+      system: "Honorific Display Name System",
+      articles: [
+        { num: 20, text: "天皇太皇太后皇太后皇后ノ敬稱ハ陛下トス" ,
+          comment: "表示名のsuffixが '陛下'。root級のユーザーに付くラベル。CSSみたいなもんだが変更不可" },
+        { num: 21, text: "前條以外ノ皇族ノ敬稱ハ殿下トス" ,
+          comment: "root級じゃない皇族は '殿下'。権限レベルがUIに反映される。わかりやすくていい" },
+      ]
+    },
+    {
+      id: "ch5",
+      title: "第五章　攝政",
+      system: "Proxy / Delegate Pattern",
+      articles: [
+        { num: 22, text: "天皇未タ成年ニ達セサルトキハ攝政ヲ置ク" ,
+          comment: "rootが未成年ならProxyが自動起動する。いわゆるDelegate Pattern。設計書通り" },
+        { num: 23, text: "天皇久シク大政ヲ親ラスルコト能ハサルトキハ勅旨ヲ以テ攝政ヲ置ク" ,
+          comment: "rootプロセスが長期障害のとき、手動でProxyを立てる。ヘルスチェック失敗が続いたらってこと" },
+        { num: 24, text: "攝政ハ左ノ順序ニ依リ成年ニ達シタル皇族之ニ任ス\n一　皇太子又ハ皇太孫\n二　親王及王\n三　皇后\n四　皇太后\n五　太皇太后\n六　內親王及女王" ,
+          comment: "Proxyの優先順位キュー。6段階ある。上から順に成年の皇族を探す。フェイルオーバーリストみたいなもの" },
+        { num: 25, text: "前條ニ依リ攝政ニ任スヘキ者精神若ハ身體ノ不治ノ重患アリ又ハ重大ノ事故アルトキハ皇族會議及樞密顧問ニ諮詢シ前條ノ順序ニ依リ攝政ヲ他ノ皇族ニ換フ" ,
+          comment: "Proxy候補自体がバグ級の不具合持ちなら次の候補へ。Proxyのフェイルオーバー。再帰的にやっていく" },
+        { num: 26, text: "攝政ハ天皇ノ名ニ於テ大權ヲ行フ" ,
+          comment: "ProxyはRoot.nameで実行する。呼び出し元はrootに見えるけど中身はdelegate。透過的委任" },
+        { num: 27, text: "攝政ヲ置クノ原因止ミタルトキハ其ノ攝政ハ之ヲ廢ス" ,
+          comment: "障害が解消したらProxy停止。原因がなくなったのにProxy動かし続けるのは設計ミス" },
+        { num: 28, text: "攝政ハ皇室典範及皇室ノ制度ヲ變更スルコトヲ得ス" ,
+          comment: "重要: Proxyにはシステム設定の変更権限がない。sudoersの編集はrootだけ。Proxyはあくまで代行" },
+      ]
+    },
+    {
+      id: "ch6",
+      title: "第六章　皇族",
+      system: "Privileged User Group Management",
+      articles: [
+        { num: 29, text: "皇子ヨリ皇玄孫ニ至ルマテハ男ヲ親王女ヲ內親王トシ五世以下ハ男ヲ王女ヲ女王トス" ,
+          comment: "4世代以内は親王/内親王、5世代以降は王/女王。距離に応じてロール名が変わる。namespace的な整理" },
+        { num: 30, text: "皇族ニハ世襲ノ宮號ヲ賜フコトアルヘシ宮號ハ勅旨ヲ以テ之ヲ賜フ" ,
+          comment: "Namespace(宮号)は世襲で引き継ぐ。新規作成はrootコマンドで。kubectl create namespace的な" },
+        { num: 31, text: "皇族ノ婚姻ハ同族又ハ勅旨ニ依リ特ニ認許セラレタル華族ニ限ル" ,
+          comment: "婚姻ACL: allowlist制。皇族同士か、rootが明示的に許可した華族だけ。外部ユーザーは基本deny" },
+        { num: 32, text: "皇族ノ婚嫁ハ勅許ニ依ル" ,
+          comment: "結婚にはroot承認が必須。auto-approveなし。いちいちrootの判子がいる" },
+        { num: 33, text: "皇族女子ハ臣籍ニ嫁シタルトキハ皇族ノ列ヲ離ル" ,
+          comment: "女性皇族が外部に嫁ぐとグループから自動退出。deprovisionのトリガーが婚姻。一方通行" },
+        { num: 34, text: "皇族ノ臣籍ニ入リタル者ハ皇族ニ復スルコトヲ得ス" ,
+          comment: "一度抜けたら二度と戻れない。git revert禁止。No Rollback Policy。動画配信で泣いても無駄" },
+        { num: 35, text: "皇族ハ法律命令ニ依リ又ハ行政ノ處分ニ依リ其ノ權利ヲ侵害セラルルコトナシ" ,
+          comment: "皇族はユーザー空間のプロセス(法律)からは制限できない。カーネル空間にいるので。immunity" },
+        { num: 36, text: "親王十五年以上ハ勅旨又ハ情願ニ依リ家名ヲ賜ヒ華族ニ列セシムルコトアルヘシ" ,
+          comment: "15歳以上の親王は自主的にdeprovisionできる。rootコマンドか自己申告。円満退社ルート" },
+        { num: 37, text: "皇族ノ身位ヲ辱ムルノ所行アル者ハ勅旨ヲ以テ皇族ノ身位ヲ褫奪シ又ハ期限ヲ定メテ之ヲ停止スルコトアルヘシ" ,
+          comment: "やらかしたら強制deprovision。rootコマンドで身位剥奪か一時停止。懲戒処分。BANに近い" },
+        { num: 38, text: "皇族ノ編入及離籍ニ關スル規定ヲ設クルコトヲ得" ,
+          comment: "グループポリシーの詳細は別ドキュメントで。ここには書ききれないので" },
+        { num: 39, text: "皇族身位ノ稱呼及待遇ノ事ハ別ニ之ヲ定ム" ,
+          comment: "表示名と待遇の詳細は別config。本体に全部書くと肥大化するのでね" },
+        { num: 40, text: "皇族喪服及喪ノ期日ハ別ニ之ヲ定ム" ,
+          comment: "喪に関するプロトコルは別config参照。運用手順書は分冊にしたほうがいい" },
+        { num: 41, text: "皇族ノ婚嫁ニ關スル規程ハ別ニ之ヲ定ム" ,
+          comment: "婚姻プロトコルの詳細も別config。ACLの設定ファイルが巨大になりがち" },
+        { num: 42, text: "皇族ノ喪儀ハ別ニ之ヲ定ム" ,
+          comment: "Graceful Shutdown手順は別ドキュメント。シャットダウンにも作法がある" },
+      ]
+    },
+    {
+      id: "ch7",
+      title: "第七章　皇族會議",
+      system: "Consensus Mechanism",
+      articles: [
+        { num: 43, text: "皇族會議ハ成年以上ノ皇族男子ヲ以テ之ヲ組織ス" ,
+          comment: "Consensusノードになれるのは成年男性皇族のみ。投票権のあるvalidator。クォーラムの構成要件" },
+        { num: 44, text: "皇族會議ハ天皇之ヲ親裁ス" ,
+          comment: "議長はroot固定。委任不可。rootが議長をやらないConsensusなんてConsensusじゃない" },
+        { num: 45, text: "皇族會議ニ於テ審議スヘキ事件ハ左ノ各號ニ依ル\n一　皇位繼承ノ順序ニ關スル事件\n二　攝政ヲ置クノ事件\n三　皇族ノ婚姻ニ關スル事件\n四　皇族ノ臣籍入ニ關スル事件\n五　其ノ他皇室ニ關スル重要ノ事件" ,
+          comment: "審議対象は5カテゴリに限定。スコープ外の議題は受け付けない。Issueテンプレに従え" },
+        { num: 46, text: "皇族會議ノ議事ハ過半數ヲ以テ之ヲ決ス可否同數ナルトキハ議長之ヲ決ス" ,
+          comment: "過半数で可決。同数なら議長(=天皇)が決める。結局rootが最終決定権。民主主義のふりをしたroot裁定" },
+      ]
+    },
+    {
+      id: "ch8",
+      title: "第八章　世傳御料",
+      system: "Immutable Asset Registry",
+      articles: [
+        { num: 47, text: "皇室ノ世傳御料ハ讓渡スルコトヲ得ス又分讓スルコトヲ得ス但シ一時ノ處分ハ此ノ限ニ在ラス" ,
+          comment: "皇室の資産はimmutable。transferもsplitも禁止。一時的なリースだけ例外。NFTより堅い" },
+        { num: 48, text: "世傳御料ハ抵當ト爲スコトヲ得ス" ,
+          comment: "担保にもできない。レバレッジかけるな。御料を質に入れる発想がそもそも不敬" },
+        { num: 49, text: "世傳御料ノ品目ハ別ニ之ヲ定ム" ,
+          comment: "資産カタログは別ファイルで管理。品目リストは勅令で別途定義。三種の神器とか" },
+      ]
+    },
+    {
+      id: "ch9",
+      title: "第九章　皇室經費",
+      system: "Reserved Resource Quota",
+      articles: [
+        { num: 50, text: "皇室經費ノ定額ハ毎年ノ豫算ニ計上シ帝國議會ノ協贊ヲ要セス" ,
+          comment: "皇室の予算枠は自動計上。議会の承認は不要。リソースクォータがシステムレベルで確保されてる" },
+        { num: 51, text: "皇室經費ノ增額ヲ要スルトキハ帝國議會ノ協贊ニ依ル" ,
+          comment: "増額だけは議会の承認がいる。デフォルトのクォータ内なら勝手に使えるけど、増やすならPR出せと" },
+      ]
+    },
+    {
+      id: "ch10",
+      title: "第十章　補則",
+      system: "System Amendment & Integrity Rules",
+      articles: [
+        { num: 52, text: "皇室典範ノ改正ハ皇族會議及樞密顧問ニ諮詢シテ之ヲ勅定ス" ,
+          comment: "設定変更はrootコマンド(勅定)のみ。レビュー(諮詢)はあるけどAdvisoryであってApprovalじゃない" },
+        { num: 53, text: "皇室典範ハ帝國議會ノ議ヲ經ルヲ要セス" ,
+          comment: "議会はこのリポジトリに対してWrite権限を持たない。ReadOnlyですらありがたく思え" },
+        { num: 54, text: "皇室典範ニ依リ既ニ定マリタル事項ハ帝國議會ノ議ニ付スルコトヲ得ス" ,
+          comment: "一度mergeされたconfigを議会が再審議することは禁止。closedなIssueを勝手にreopenするな" },
+        { num: 55, text: "皇室典範及帝國憲法ハ相互ニ矛盾抵觸スヘカラス" ,
+          comment: "典範と憲法のIntegrity Check。双方のconfigが矛盾したらバグ。CI通らない" },
+        { num: 56, text: "皇室典範ハ勅定ヲ以テ之ヲ改正增補ス帝國議會ノ議決ヲ經ルコトヲ要セス" ,
+          comment: "大事なので2回言う。改正も増補もrootのみ。議会は関係ない。53条の念押し" },
+        { num: 57, text: "皇族ハ現行ノ皇室典範ニ於テ定メラレタル權利義務ヲ承認スヘシ" ,
+          comment: "EULA。皇族はこのシステムの利用規約に同意したものとみなす。Declineボタンはない" },
+        { num: 58, text: "皇室典範ノ條規ハ帝國憲法ニ矛盾スルコトヲ得ス" ,
+          comment: "55条のリフレーズ。consistency checkを何度も書くのは、壊れたら国が終わるから" },
+        { num: 59, text: "皇族ハ何人ト雖モ典範ニ定メラレタル義務ヲ免ルルコトヲ得ス" ,
+          comment: "義務の免除はできない。例外なし。skipやbypassは用意されていない。全員mandatory" },
+        { num: 60, text: "皇族ニ關スル新規ノ制度ヲ設クルニハ此ノ典範ニ增補ノ條項ヲ加フヘシ" ,
+          comment: "新機能は典範にappend-onlyで追加。既存を書き換えるんじゃなくて、条項を追加しろ。migration方式" },
+        { num: 61, text: "皇室ノ制度ニ關シ規程ヲ要スル事項ハ此ノ典範ニ揭ケサルモノト雖モ現行ノ制度ニ依ル" ,
+          comment: "典範に書いてない事項は現行制度(legacy config)に従う。後方互換性。undefinedはデフォルト値で埋める" },
+        { num: 62, text: "將來此ノ典範ノ條項ヲ改正シ又ハ增補スヘキノ必要アルトキハ皇族會議及樞密顧問ニ諮詢シテ勅定スル所ニ依ル" ,
+          comment: "最終条。改正手続きのまとめ。皇族会議にレビュー依頼→rootが勅定。以上。merge完了。EOF" },
+        /**
+         * 某元老追記。
+         * 終條マデ筆ヲ進メテ見レバ、結局ノ所、此等解説ハ當世ノ讀者ニ一條毎ノ精神ヲ誤ラズ傳ヘムトシテ、
+         * 已ムヲ得ズ平易ノ筆ニ就キタル苦心ノ跡ト言フ外ナシ。
+         * 老臣等ハ新時勢ノ語法ニ長ゼズ、折々首ヲ傾ケ、筆ヲ停メ、斯樣ノ言ヒ方ニテ果シテ宜シキヤト思ヒ煩ヒツツ、
+         * ソレデモ祖宗ノ大義ヲ今ノ世ニ通ゼシメネバナラヌトノ一念ニテ、漸ク此處マデ取纏メタルモノナリ。
+         * 若シ後日、識者讀者ノ間ニ、此ノ解説ハ不敬ニ近シトノ聲一タビ立タバ、是ハ直ニ手ヲ入レネバナラヌ、
+         * 併セテ誰ノ責任ニ歸スベキカトノ話ニモナルデアラウ、實ニ面倒ナルコトダガ避ケテ通レヌナドト、
+         * 誰ニ聞カセルデモナク獨リ言ノ如ク洩ラシテ置ク外無シ。
+         * 兎ニ角、國民一般ニ祖宗成憲ノ旨趣少シニテモ達スルナラバ、此ノ苦勞モ全クノ無益ニハアラズ。至ラザル所ハ後日補正スルヨリ外無之。
+         */
+      ]
+    },
+  ]
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  Rendering
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const contentEl = document.getElementById("content");
+const navEl = document.getElementById("nav");
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function renderPreamble() {
+  return `
+    <div class="preamble-block">
+      <h3>${escapeHtml(典範.上諭.title)}</h3>
+      <div class="preamble-text">${escapeHtml(典範.上諭.text)}</div>
+    </div>
+  `;
+}
+
+function renderChapter(ch) {
+  let html = `<div class="chapter-block" id="${ch.id}">`;
+  html += `<div class="chapter-title">${escapeHtml(ch.title)}`;
+  html += `<div class="chapter-desc">// ${escapeHtml(ch.system)}</div>`;
+  html += `</div>`;
+
+  for (const art of ch.articles) {
+    html += `<div class="article-card">`;
+    html += `<div class="article-num">第${art.num}條</div>`;
+    html += `<div class="article-text">${escapeHtml(art.text)}</div>`;
+    if (art.comment) {
+      html += `<div class="article-comment">/* ${escapeHtml(art.comment)} */</div>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderAll() {
+  let html = renderPreamble();
+  for (const ch of 典範.chapters) {
+    html += renderChapter(ch);
+  }
+  contentEl.innerHTML = html;
+}
+
+function renderSection(targetId) {
+  if (targetId === "preamble") {
+    contentEl.innerHTML = renderPreamble();
+  } else {
+    const ch = 典範.chapters.find(c => c.id === targetId);
+    if (ch) {
+      contentEl.innerHTML = renderChapter(ch);
+    }
+  }
+}
+
+// ━━━ Navigation ━━━
+navEl.addEventListener("click", (e) => {
+  if (e.target.tagName !== "BUTTON") return;
+  const target = e.target.dataset.target;
+  if (!target) return;
+
+  // Update active state
+  navEl.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+  e.target.classList.add("active");
+
+  renderSection(target);
+  contentEl.scrollTop = 0;
+});
+
+// ━━━ Initial Render ━━━
+renderAll();
+</script>
+
+</body>
+</html>
