@@ -1,0 +1,140 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   DX推進室対応Bot (koho-response-bot)
+#
+#   本自動応答システムは、旧皇室典範DX推進リポジトリに
+#   寄せられる Issue・Pull Request に対し、
+#   レガシーシステムである旨をご案内するものです。
+#
+#   管理: 宮内庁DX推進室
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+name: DX推進室対応Bot
+
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  # ━━━ 自動応答処理 ━━━
+  auto-response:
+    name: 自動応答（DX推進室対応Bot）
+    runs-on: ubuntu-latest
+
+    steps:
+      # ━━━ 第一段階: 受付記録 ━━━
+      - name: お問い合わせを記録する
+        id: log-inquiry
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【DX推進室対応Bot】起動"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "■ 受付日時: $(TZ=Asia/Tokyo date '+%Y年%m月%d日 %H時%M分%S秒')"
+          echo "■ 投稿者:   ${{ github.actor }}"
+          echo "■ 種別:     ${{ github.event_name }}"
+          echo ""
+          echo "※ 自動応答処理を開始します。"
+
+      # ━━━ 第二段階: Issue への応答 ━━━
+      - name: Issue に対するご案内
+        if: github.event_name == 'issues'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const ご案内文 = [
+              "## 📚 お問い合わせありがとうございます",
+              "",
+              `@${context.actor} さん、本リポジトリへのご関心をお寄せいただきありがとうございます。`,
+              "",
+              "本リポジトリは **旧皇室典範（明治22年制定・昭和22年廃止）** の",
+              "レガシーシステムです。IT用語による注釈付き解説を含む",
+              "教育・風刺コンテンツとして公開しています。",
+              "",
+              "レガシーコードの性質上、コンテンツの変更を伴う提案は",
+              "受け付けておりませんので、本 Issue はクローズさせていただきます。",
+              "",
+              "ご質問やお気づきの点がございましたら、",
+              "宮内庁の公式情報をご参照ください。",
+              "",
+              "---",
+              "*宮内庁DX推進室（DX推進室対応Bot）*",
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: ご案内文,
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: "closed",
+              state_reason: "not_planned",
+              labels: ["自動クローズ"],
+            });
+
+            console.log(`Issue #${context.issue.number} にご案内を投稿し、クローズしました。`);
+
+      # ━━━ 第三段階: Pull Request への応答 ━━━
+      - name: Pull Request に対するご案内
+        if: github.event_name == 'pull_request_target'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const ご案内文 = [
+              "## 📚 Pull Request をいただきありがとうございます",
+              "",
+              `@${context.actor} さん、本リポジトリへの貢献のご意向をお寄せいただきありがとうございます。`,
+              "",
+              "本リポジトリは **旧皇室典範（明治22年制定・昭和22年廃止）** の",
+              "レガシーシステムとして管理されており、",
+              "外部からの変更提案は受け付けておりません。",
+              "",
+              "レガシーコードの正確性を保つため、本 PR はクローズさせていただきます。",
+              "ご理解のほどよろしくお願いいたします。",
+              "",
+              "---",
+              "*宮内庁DX推進室（DX推進室対応Bot）*",
+            ].join("\n");
+
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              event: "COMMENT",
+              body: ご案内文,
+            });
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              state: "closed",
+            });
+
+            console.log(`PR #${context.payload.pull_request.number} にご案内を投稿し、クローズしました。`);
+
+      # ━━━ 最終段階: 対応記録 ━━━
+      - name: 対応記録を保存する
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【DX推進室対応Bot】処理完了報告"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "処理日時: $(TZ=Asia/Tokyo date '+%Y年%m月%d日 %H時%M分%S秒')"
+          echo "投稿者:   ${{ github.actor }}"
+          echo "種別:     ${{ github.event_name }}"
+          echo "対応内容: ご案内の投稿、Issue/PRのクローズ"
+          echo ""
+          echo "以上、DX推進室対応Botによる自動応答を完了しました。"

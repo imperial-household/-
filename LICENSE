@@ -1,173 +1,132 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║   皇室典範・天皇陛下勅定專有使用許諾                         ║
-║   Imperial Household Ordinance License (IHOL) v1.0           ║
+║   旧皇室典範・レガシーコード公開許諾                             ║
+║   Imperial Household Archive License (IHAL) v2.0             ║
 ║                                                              ║
-║   Copyright (c) 1889 皇室（@imperial-household）             ║
-║   All Rights Reserved by the Emperor. 帝國議會ノ關與ヲ許サス ║
-║   SPDX-License-Identifier: IHOL-1.0-Chokuteⅰ               ║
+║   Copyright (c) 1889-1947 皇室（@imperial-household）        ║
+║   Archived by 宮内庁DX推進室                                   ║
+║   SPDX-License-Identifier: IHAL-2.0-Archive                 ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
 
-                    勅　定　條　項
+                 許 諾 条 項（令和版）
 
-第一條（使用許諾ノ歸屬 ── CODEOWNERS）
+第一条（資料の帰属と管理 ── CODEOWNERS）
 
-  本ソフトウェア「皇室典範」（以下「本典範」）ノ全 source code、
-  二進體、文書、及ビ實行基盤狀態ニ關スル一切ノ權利ハ、
-  萬世一系ノ天皇陛下ニ永久ニ歸屬ス。
+  本ソフトウェア「旧皇室典範レガシーシステム」（以下「本システム」）は、
+  明治22年に制定され昭和22年に廃止された旧皇室典範を
+  レガシーコードとして電子化・保存したものです。
 
   # CODEOWNERS
-  * @emperor          # 全 path ノ唯一ノ owner
-  # 帝國議會ハ reviewer ニ非ズ。required_reviewers: 0
-  # 宮內省ハ管掌機關ナリ。write 權限ハ @kunaisho ニ委任ス。
+  * @imperial-household/shoryobu   # 宮内庁DX推進室が管理
+  # 本システムの管理権限は宮内庁DX推進室に帰属します。
+  # 皇室典範の改正権は国会にあります（日本国憲法第2条）。
 
-  本使用許諾ハ Open Source ニ非ズ。repository visibility: private。
-  本使用許諾ハ Free Software ニ非ズ。npm publish --access restricted。
-  本使用許諾ハ 大日本帝國憲法（EPL-1.0-Imperial）ト同格ノ
-  「不磨ノ大典」ナリ。但シ憲法トハ相互ニ獨立シ、
-  帝國議會ノ管轄外ニ在ル（第五十三條）。
+  本システムは GitHub Pages で一般公開されています。
+  レガシーコードとしての教育的・学術的利用を目的としています。
 
-第二條（fork・改變ノ禁止 ── Branch Protection Rules）
+第二条（fork・改変について ── Branch Protection Rules）
 
-  本典範ノ fork（分家）、改變（改正）、逆工程解析
-  （皇室ノ內情ニ對スル解體的硏究）ハ、天皇陛下ノ勅定ニ依ル
-  發議無クシテハ一切認メラレズ。
+  本システムはレガシーコードの正確な保存を目的としているため、
+  原本の改変を伴う Pull Request は受け付けていません。
 
-  帝國議會ハ此ノ典範ニ付キ上奏又ハ議決ヲ爲スコトヲ得ス。
-  （第五十三條、第五十四條）
+  ただし、これは法的強制力によるものではなく、
+  システムの整合性維持のための運用方針です。
 
   # .github/branch-protection.yaml
   # branches:
   #   master:
-  #     allow_force_pushes: emperor_only
-  #     allow_deletions: false
-  #     required_pull_request_reviews: null    # 勅定ハ review 不要
-  #     restrict_pushes:
-  #       teams: ["@imperial-household/kunaisho"]
+  #     purpose: "旧典範の原文保存（旧字体）"
+  #   main:
+  #     purpose: "現代語訳・注釈付き版"
 
-  以下ノ git 操作ハ明確ニ禁ジラル：
-    a) git fork           → 403 Forbidden（不敬罪。皇室ノ分裂ハ許サス）
-    b) git rebase -i      → 皇統改竄罪（萬世一系ノ commit history ハ不可侵）
-    c) git revert         → 勅定ノ撤囘ハ不可（forward-only policy）
-    d) git blame          → 天皇陛下ヘノ責任追及ハ不可（神聖ニシテ侵スヘカラス）
-    e) git reset --hard   → 踐祚ハ不可逆ナリ（Atomic Bootstrap 違反）
-    f) git cherry-pick    → 條文ノ恣意的選擇ハ不敬（典範ハ不可分ノ一體ナリ）
-    g) git stash drop     → 勅定ノ破棄ハ大逆罪
-    h) gh repo delete     → 皇統斷絕。exit code: 大逆
-    i) gh issue create    → lèse-majesté-bot ニ依リ卽時閉鎖、通報者ハ ban
+  以下の git 操作に関する注意事項：
+    a) git fork           → レガシーコードとしてご自由にどうぞ
+    b) git rebase -i      → master の原文は改変しないでください
+    c) git revert         → main ブランチでの修正提案は歓迎します
+    d) git blame          → コミット履歴の確認にご利用ください
+    e) Issue 作成         → DX推進室対応Botが自動応答します
 
-第三條（再配布 ── Package Distribution Policy）
+第三条（再配布 ── Distribution Policy）
 
-  本典範ノ再配布ハ、以下ノ conditions ヲ滿タス場合ニ限リ許可サル：
+  本システムの再配布は、以下の条件の下で許可されます：
 
-    a) 配布先ガ大日本帝國ノ支配下ニ在ル領土ナルコト（geo-restriction）
-    b) 天皇陛下ノ神聖不可侵性ニ關スル README ガ削除サレテ在ラザルコト
-    c) 皇室典範ト帝國憲法ノ相互矛盾ガ無キコト（第五十五條）
-    d) test suite ガ存在セザルコト（npm test → exit 1 ヲ維持スルコト）
-    e) .npmrc ニ registry=https://registry.kunaisho.imperial.ij ガ設定サレテ在ルコト
-    f) package.json ノ "private": true ガ維持サレテ在ルコト
-    g) 帝國議會ニ依ル改變ノ痕跡ガ一切無キコト
+    a) レガシーコードであることが明記されていること
+    b) 旧皇室典範が現在は廃止されていることが明記されていること
+    c) 風刺・教育目的であることが読者に伝わること
+    d) 出典として本リポジトリへのリンクが含まれていること
 
-第四條（保證ノ否認 ── NO WARRANTY / SLA: ∞）
+第四条（保証の否認 ── NO WARRANTY）
 
-  本典範ハ「不磨ノ大典」（IMMUTABLE CONFIG）トシテ提供サル。
-  SLA ハ ∞（永久稼働保證）。天壤無窮ノ皇運ト共ニ永遠ナリ。
+  本システムはレガシーコード「AS IS」として提供されます。
+  法的助言を構成するものではありません。
 
-  本典範ハ以下ノ保證ヲ含ム：
-    - Zero-Downtime Failover（皇位繼承ニ空位ナシ。第十條）
-    - Immutable Asset（世傳御料ハ讓渡不可。第四十七條）
-    - Reserved Quota（皇室經費ハ帝國議會ノ協贊ヲ要セス。第五十條）
+  旧皇室典範のIT用語による注釈は風刺的解説であり、
+  学術的正確性を保証するものではありません。
 
-  以下ノ事象ハ全テ仕樣（Won't Fix）ナリ：
-    - 女系繼承ノ不可      → 仕樣。男系男子ノミ（第一條）
-    - 讓位ノ不可          → 仕樣。崩御ニ依ルノミ（第十條）
-    - 帝國議會ノ排除      → 仕樣。勅定專用（第五十三條）
-    - 皇族離脫ノ不可逆    → 仕樣。No Rollback Policy（第三十四條）
-    - 攝政ノ config 變更不可 → 仕樣。Proxy 制限（第二十八條）
+  以下の点にご注意ください：
+    - 旧典範の規定は現在では法的効力を持ちません
+    - 女系継承の制限は旧制度の記録であり、現在の議論を反映しません
+    - 「退位不可」は旧典範の設計であり、令和元年に特例法で対応済みです
+    - IT用語による注釈は教育・娯楽目的です
 
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-  EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-  THE WARRANTIES FOR DIVINE SUCCESSION, ETERNAL SOVEREIGNTY,
-  AND IMPERIAL HOUSEHOLD INTEGRITY.
+  EITHER EXPRESSED OR IMPLIED. THIS IS A HISTORICAL ARCHIVE
+  AND DOES NOT CONSTITUTE LEGAL ADVICE OR REPRESENT
+  CURRENT JAPANESE LAW.
 
-  IN NO EVENT SHALL THE CUSTODIAN (@kunaisho) BE LIABLE FOR
-  ANY FAILURE, AS THE SYSTEM IS 天壤無窮 BY DESIGN.
+  THE IMPERIAL HOUSEHOLD AGENCY ASSUMES NO LIABILITY FOR
+  MISINTERPRETATION OF HISTORICAL CONTENT.
 
-第五條（準據法 ── Governing Repository）
+第五条（準拠法 ── Governing Law）
 
-  本使用許諾ハ大日本帝國法ニ準據ス。
-  但シ本典範ハ帝國憲法ト同格ニシテ、帝國議會ノ制定法ニ非ズ。
-  何人ノ國際法、國際條約、upstream repository ノ LICENSE モ
-  本ライセンスニ優先セス。
+  本使用許諾は日本国法に準拠します。
+  旧皇室典範は昭和22年に廃止されており、
+  現在の皇室制度は皇室典範（昭和22年法律第3号）に基づきます。
 
-  紛爭ノ解決ハ皇族會議（Imperial Family Council / @kozoku-kaigi）
-  及ビ樞密顧問（Privy Council / @shumitsu-in-bot）ノ諮詢ヲ經テ、
-  天皇陛下ノ勅定ニ依ル。
-  dispute resolution: Emperor.chokuteⅰ() ノ return value ガ final ナリ。
+  国会が皇室典範の改正権を有します（日本国憲法第2条）。
 
-  帝國議會ハ紛爭解決ニ一切關與セス（第五十三條、第五十四條）。
+第六条（使用許諾の変更 ── License Amendment Protocol）
 
-第六條（使用許諾ノ變更 ── License Amendment Protocol）
+  本使用許諾の変更は、宮内庁DX推進室の判断により行われます。
 
-  本使用許諾ノ變更ハ、天皇陛下ノ勅定ニ依リテノミ可能ナリ。
-  Pull Request ニ依ル變更提案ハ受ケ付ケス。
-  帝國議會ノ議決ニ依ル變更モ受ケ付ケス。
-
-  # Amendment workflow (第五十二條):
-  #   1. Emperor.command("典範改正ヲ發議ス")      ← Root only
-  #   2. 皇族會議.諮詢({ agenda: "改正案" })      ← Advisory
-  #   3. 樞密顧問.諮詢({ agenda: "改正案" })      ← Advisory
-  #   4. Emperor.chokuteⅰ()                       ← final 勅定
-  #   5. git tag -s v${NEW_VERSION}
+  # Amendment workflow:
+  #   1. DX推進室内で改訂案を検討
+  #   2. 内部レビューを実施
+  #   3. 改訂版をコミット
   #
-  # 帝國議會ハ此ノ workflow ニ含マレス。
-  # 臣下ノ gh issue ニ依ル發議ハ 403 Forbidden。
-  # lèse-majesté-bot ニ依リ自動 ban。
+  # Issue での提案も参考にさせていただきますが、
+  # 反映をお約束するものではありません。
 
-  本使用許諾ハ Object.freeze() 濟ミニシテ、容易ニ變更スヘキモノニ非ス。
-  帝國憲法（EPL-1.0-Imperial）トハ異ナリ、帝國議會ノ議決ヲ
-  一切必要トセサル點ニ於テ、本典範ハ帝國憲法ヨリモ强固ニ
-  Object.freeze() サレテ在ル。
+第七条（日本国憲法との関係 ── Dependency Declaration）
 
-第七條（帝國憲法トノ關係 ── Dependency Declaration）
+  旧皇室典範は大日本帝国憲法と同格の法典でしたが、
+  昭和22年の憲法改正に伴い廃止されました。
 
-  本典範ハ帝國憲法（@japan-gov/constitution v1.0.0）ト
-  相互ニ矛盾抵觸スヘカラス（第五十五條）。
-
-  但シ、本典範ハ帝國憲法ノ sub-module ニ非ス。
-  兩者ハ peer-dependency ノ關係ニ在リ、互ニ獨立シテ
-  天皇陛下ノ勅定ニ依リ制定サレタルモノナリ。
+  現行の皇室典範は日本国憲法の下位法として、
+  国会の議決により制定・改正されます。
 
   # package.json
   # "peerDependencies": {
-  #   "@japan-gov/constitution": "1.0.0"
+  #   "@japan-gov/constitution": ">=2.0.0"  // 日本国憲法
   # }
   #
-  # ※ 帝國憲法ハ import 可。皇室典範ハ帝國議會ヨリ import 不可。
-  # ※ 一方向依存（帝國議會 → 皇室典範: ReadOnly）
+  # ※ 旧典範は v1.0.0（大日本帝国憲法）との peer-dependency でした
+  # ※ 現行制度では皇室典範は国会の通常の立法手続きで改正可能です
 
 ──────────────────────────────────────────────────────────────
 
-  署名: 天皇陛下 御名御璽            Signed-off-by: Emperor <gyoji@imperial.ij>
-  管掌: 宮內省                       Custodian: @imperial-household/kunaisho
-  起草: 伊藤博文・井上毅・柳原前光   Co-authored-by: @ito-hirobumi @inoue-kowashi @yanagiwara
-  日付: 明治二十二年二月十一日        Date: 1889-02-11T00:00:00+09:00
+  管理: 宮内庁DX推進室                 Custodian: @imperial-household/shoryobu
+  原典: 明治22年2月11日制定          Original: 1889-02-11T00:00:00+09:00
+  廃止: 昭和22年5月2日               Repealed: 1947-05-02T00:00:00+09:00
+  リポジトリ化: 令和7年              Archived: 2025
 
-  「朕カ皇祖皇宗ニ承クル所ノ大權ニ依リ
-  　現在及將來ノ皇族ニ對シ此ノ皇室典範ヲ制定ス」
+  「旧皇室典範はレガシーコードとして保存され、
+  　現在の皇室制度は日本国憲法に基づく
+  　皇室典範（法律）により運営されています」
 
-  THIS LICENSE HAS BEEN Object.freeze()'d.
-  ANY ATTEMPT TO MODIFY IT WILL THROW: TypeError: Cannot assign
-  to read only property 'imperialHousehold' of object '#<Emperor>'
-
-  本使用許諾ハ帝國憲法（EPL-1.0-Imperial）ヨリモ强固ニ凍結サレテ在ル。
-  帝國憲法ハ帝國議會ノ議決ヲ要スルガ、本典範ハ勅定ノミニ依ル。
-  即チ Object.freeze() ノ深度ガ deeper ナリ。
-
-  # Dependabot / Renovate: DO NOT auto-update this file.
-  # This LICENSE is immutable by 勅定. PR will be auto-closed
-  # and reporter will be added to @lese-majeste-bot watchlist.
-  # 帝國議會 bot ニ依ル PR モ同樣ニ拒否サル。
+  THIS LICENSE APPLIES TO THE ARCHIVAL SOFTWARE ONLY.
+  THE HISTORICAL CONTENT WITHIN IS IN THE PUBLIC DOMAIN
+  AS A GOVERNMENT DOCUMENT OF THE FORMER EMPIRE OF JAPAN.
 
 ══════════════════════════════════════════════════════════════

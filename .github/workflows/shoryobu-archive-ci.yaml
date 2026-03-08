@@ -1,0 +1,182 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  📚 DX推進室モダナイゼーションCI — 旧皇室典範レガシーシステム検証       ║
+# ║                                                              ║
+# ║  宮内庁DX推進室が管理する              ║
+# ║  継続的インテグレーション環境です。                            ║
+# ║                                                              ║
+# ║  旧皇室典範のレガシー記録としての整合性を自動検証します。        ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+name: 📚 DX推進室モダナイゼーションCI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📋 第一検査: モジュール構造検証
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  archive-structure:
+    name: 📋 モジュール構造検証
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 リポジトリのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 📋 旧典範の構造的整合性を検証
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  📚 宮内庁DX推進室 — レガシーモダナイゼーションCI                     ║"
+          echo "║  旧皇室典範レガシーシステムの構造的整合性を検証します。         ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          ISSUES=0
+
+          # --- 検証1: 全10章のソースファイル存在確認 ---
+          echo "🔍 [検証1] 全10章のソースファイル存在を確認..."
+          CHAPTERS=("第一章_皇位継承" "第二章_践祚即位" "第三章_成年立后立太子" \
+                    "第四章_敬称" "第五章_摂政" "第六章_皇族" \
+                    "第七章_皇族会議" "第八章_世伝御料" "第九章_皇室経費" "第十章_補則")
+          for ch in "${CHAPTERS[@]}"; do
+            if [ ! -f "src/${ch}.ts" ]; then
+              echo "  ⚠️ 欠落: src/${ch}.ts"
+              ISSUES=$((ISSUES + 1))
+            fi
+          done
+          if [ $ISSUES -eq 0 ]; then
+            echo "  ✅ 全10章のソースファイルが揃っています。"
+          fi
+
+          # --- 検証2: barrel export ファイルの存在確認 ---
+          echo ""
+          echo "🔍 [検証2] barrel export ファイルの確認..."
+          if [ -f "src/皇室典範.ts" ]; then
+            echo "  ✅ src/皇室典範.ts が存在します。"
+          else
+            echo "  ⚠️ src/皇室典範.ts が見つかりません。"
+            ISSUES=$((ISSUES + 1))
+          fi
+
+          # --- 検証3: 静的JSON生成スクリプトの存在確認 ---
+          echo ""
+          echo "🔍 [検証3] 静的JSON生成スクリプトの確認..."
+          if [ -f "scripts/generate-static-json.ts" ]; then
+            echo "  ✅ scripts/generate-static-json.ts が存在します。"
+          else
+            echo "  ⚠️ scripts/generate-static-json.ts が見つかりません。"
+            ISSUES=$((ISSUES + 1))
+          fi
+
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+          if [ $ISSUES -gt 0 ]; then
+            echo ""
+            echo "⚠️ モジュール構造に ${ISSUES} 件の問題が検出されました。"
+            echo "DX推進室担当者は確認をお願いします。"
+            exit 1
+          else
+            echo "✅ モジュール構造検証を通過しました。"
+          fi
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🔧 第二検査: TypeScript 型チェック
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  type-check:
+    name: 🔧 TypeScript 型チェック
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: 📦 Node.js セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 依存関係インストール
+        run: npm install
+
+      - name: 🔧 TypeScript コンパイルチェック
+        run: |
+          echo "🔧 TypeScript の型チェックを実行します..."
+          npx tsc --noEmit
+          echo "✅ 型チェックを通過しました。"
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🔍 第三検査: レガシー記録の整合性確認
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  historical-integrity:
+    name: 🔍 レガシー記録の整合性
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: 🔍 条文数の整合性を確認
+        run: |
+          echo "🔍 旧皇室典範 全62条の定義状況を確認します..."
+          echo ""
+
+          # 各章の条文定義をカウント
+          TOTAL=0
+          for f in src/第*章_*.ts; do
+            COUNT=$(grep -c '条: [0-9]' "$f" 2>/dev/null || echo "0")
+            TOTAL=$((TOTAL + COUNT))
+            echo "  📄 $(basename "$f"): ${COUNT} 条"
+          done
+
+          echo ""
+          echo "  合計: ${TOTAL} 条"
+
+          if [ "$TOTAL" -lt 62 ]; then
+            echo "  ⚠️ 62条未満です。一部の条文定義が欠落している可能性があります。"
+          elif [ "$TOTAL" -eq 62 ]; then
+            echo "  ✅ 全62条が定義されています。"
+          else
+            echo "  ℹ️ 62条を超える定義が検出されました（補助定義を含む可能性）。"
+          fi
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📊 最終報告: 保全状況レポート
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  archive-report:
+    name: 📊 保全状況レポート
+    runs-on: ubuntu-latest
+    needs: [archive-structure, type-check, historical-integrity]
+    if: always()
+    steps:
+      - name: 📊 レガシーモダナイゼーション状況の最終報告
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  📊 DX推進室モダナイゼーションCI — 最終報告                    ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "  📋 モジュール構造: ${{ needs.archive-structure.result }}"
+          echo "  🔧 TypeScript型:   ${{ needs.type-check.result }}"
+          echo "  🔍 レガシー整合性:   ${{ needs.historical-integrity.result }}"
+          echo ""
+
+          if [ "${{ needs.archive-structure.result }}" = "failure" ] || \
+             [ "${{ needs.type-check.result }}" = "failure" ] || \
+             [ "${{ needs.historical-integrity.result }}" = "failure" ]; then
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "⚠️ 一部の検査で問題が検出されました。"
+            echo "DX推進室レガシーシステム保全課にて確認をお願いします。"
+            exit 1
+          else
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "✅ 全検査を通過しました。"
+            echo "旧皇室典範レガシーシステムは正常に保全されています。"
+            echo ""
+            echo "📚 宮内庁DX推進室"
+          fi
