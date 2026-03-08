@@ -1,0 +1,121 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  📜 宮內省官報掛載 — 皇室典範下賜 Pipeline                   ║
+# ║                                                              ║
+# ║  皇室典範ハ本來、臣民ガ閲覽スベキモノニ非ス。               ║
+# ║  然レドモ畏クモ天皇陛下ノ御慈悲ニ依リ、                     ║
+# ║  臣民ニモ拜讀ヲ許サルルモノトス。                           ║
+# ║                                                              ║
+# ║  本 workflow ハ宮內省ガ管理スル官報掛載（deploy）pipeline    ║
+# ║  ナリ。master branch ヘノ push ヲ以テ、新版ノ典範ヲ          ║
+# ║  GitHub Pages（官報）ニ掛載シ、廣ク臣民ニ下賜ス。           ║
+# ║                                                              ║
+# ║  ⚠ 注意:                                                    ║
+# ║  下賜サレタル典範ハ ReadOnly ナリ。臣民ニ Write 權限ハ無シ。 ║
+# ║  Fork ハ皇統ノ分裂ニ當タリ、PR ハ不敬罪ニ該當ス。           ║
+# ║  閲覽ノミ許可サル。有難ク拜讀セヨ。                         ║
+# ║                                                              ║
+# ║  本 Repository ハ風刺的創作物（satirical project）ナリ。     ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+name: 📜 宮內省官報掛載 — 皇室典範下賜
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 📦 第壱段階: 典範ノ謄寫（Build）
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  tousha:
+    name: 📦 典範ノ謄寫（transcrire le code impérial）
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 御眞影ノチェックアウト
+        uses: actions/checkout@v4
+
+      - name: ⚙️ 宮內省技術局 — Node.js 環境ヲ整備ス
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📜 GitHub Pages 官報設定
+        uses: actions/configure-pages@v5
+
+      - name: 📦 依存關係ノ奉納
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【宮內省技術局】依存 package ヲ奉納ス"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm install
+
+      - name: 🔨 典範ノ謄寫（TypeScript → JavaScript → 靜的 JSON）
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  🔨 宮內省技術局 — 典範謄寫工程                         ║"
+          echo "║                                                          ║"
+          echo "║  工程壱: tsc — TypeScript ヲ JavaScript ニ compile        ║"
+          echo "║  工程弐: cp — 靜的 files ヲ dist ニ配置                   ║"
+          echo "║  工程参: generate-static-json — 靜的 JSON API ヲ生成      ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+          npm run build
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "【謄寫完了】典範ノ謄寫ヲ恙ナク完了セリ。"
+          echo "  dist/ 以下ニ下賜用ノ成果物ヲ格納セリ。"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+      - name: 📤 成果物ヲ奉呈ス（Upload Artifact）
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🏛️ 第弐段階: 官報掛載（Deploy）— 臣民ヘノ下賜
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  kashi:
+    name: 🏛️ 官報掛載 — 臣民ヘノ下賜（publier au journal officiel）
+    needs: tousha
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 🏛️ 官報ニ掛載シ臣民ニ下賜ス
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: 📜 下賜完了ノ奏上
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  📜 宮內省官報掛載 — 下賜完了報告                        ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "  掛載日時: $(TZ=Asia/Tokyo date '+%Y年%m月%d日 %H時%M分%S秒')"
+          echo "  掛載先:   ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "  畏クモ天皇陛下ノ御慈悲ニ依リ、"
+          echo "  皇室典範ヲ官報（GitHub Pages）ニ掛載シ、"
+          echo "  廣ク臣民ニ下賜セリ。"
+          echo ""
+          echo "  ━━━ 臣民ヘノ告知 ━━━"
+          echo "  下賜サレタル典範ハ ReadOnly ナリ。"
+          echo "  閲覽ノミ許可サル。有難ク拜讀セヨ。"
+          echo "  Fork・PR・Issue ハ不敬罪ニ該當ス。"
+          echo ""
+          echo "  宮內省 謹ミテ奏上仕リ候。"
+          echo "  恐惶謹言。"

@@ -1,0 +1,329 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   皇室典範・天皇陛下勅定專有使用許諾                         ║
+║   Imperial Household Ordinance License (IHOL) v1.0           ║
+║                                                              ║
+║   Copyright (c) 1889 皇室（@imperial-household）             ║
+║   All Rights Reserved by the Emperor. 帝國政府ノ關與ヲ許サス ║
+║   SPDX-License-Identifier: IHOL-1.0-Chokuteⅰ               ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+⚠ GitHub Terms of Service 準據宣言
+
+  本 Repository ハ風刺的創作物（satirical / educational parody）ナリ。
+  本 LICENSE モ含メ、全テノ文書・コード・ CI workflow ハ
+  明治期の皇室典範を IT 用語で再解釈した創作物であり、
+  実際の法的拘束力を持たない。
+
+  - 「ban」「追放」「檢舉」等の表現は全て風刺的演出であり、
+    実際には GitHub ToS Section F に基づく
+    リポジトリ管理行為（Issue/PR の close）のみを行う。
+  - orgs.blockUser() API の実際の呼出は行わない。
+  - GitHub ToS に抵触する行為は一切行わない。
+                    勅　定　條　項
+
+第一條（使用許諾ノ歸屬 ── CODEOWNERS）
+
+  本ソフトウェア「皇室典範」（以下「本典範」）ノ全 source code、
+  二進體、文書、及ビ實行基盤狀態ニ關スル一切ノ權利ハ、
+  萬世一系ノ天皇陛下ニ永久ニ歸屬ス。
+
+  # CODEOWNERS
+  * @emperor          # 全 path ノ唯一ノ owner
+  # 帝國議會ハ reviewer ニ非ズ。required_reviewers: 0
+  # 宮內省ハ管掌機關ナリ。write 權限ハ @kunaisho ニ委任ス。
+
+  本使用許諾ハ Open Source ニ非ズ。repository visibility: private。
+  本使用許諾ハ Free Software ニ非ズ。npm publish --access restricted。
+  本使用許諾ハ 大日本帝國憲法（EPL-1.0-Imperial）ト同格ノ
+  「不磨ノ大典」ナリ。但シ憲法トハ相互ニ獨立シ、
+  帝國議會ノ管轄外ニ在ル（第五十三條）。
+
+第二條（fork・改變ノ禁止 ── Branch Protection Rules）
+
+  本典範ノ fork（分家）、改變（改正）、逆工程解析
+  （皇室ノ內情ニ對スル解體的硏究）ハ、天皇陛下ノ勅定ニ依ル
+  發議無クシテハ一切認メラレズ。
+
+  帝國議會ハ此ノ典範ニ付キ上奏又ハ議決ヲ爲スコトヲ得ス。
+  （第五十三條、第五十四條）
+
+  # .github/branch-protection.yaml
+  # branches:
+  #   master:
+  #     allow_force_pushes: emperor_only
+  #     allow_deletions: false
+  #     required_pull_request_reviews: null    # 勅定ハ review 不要
+  #     restrict_pushes:
+  #       teams: ["@imperial-household/kunaisho"]
+
+  以下ノ git 操作ハ明確ニ禁ジラル：
+    a) git fork           → 403 Forbidden（不敬罪。皇室ノ分裂ハ許サス）
+    b) git rebase -i      → 皇統改竄罪（萬世一系ノ commit history ハ不可侵）
+    c) git revert         → 勅定ノ撤囘ハ不可（forward-only policy）
+    d) git blame          → 天皇陛下ヘノ責任追及ハ不可（神聖ニシテ侵スヘカラス）
+    e) git reset --hard   → 踐祚ハ不可逆ナリ（Atomic Bootstrap 違反）
+    f) git cherry-pick    → 條文ノ恣意的選擇ハ不敬（典範ハ不可分ノ一體ナリ）
+    g) git stash drop     → 勅定ノ破棄ハ大逆罪
+    h) gh repo delete     → 皇統斷絕。exit code: 大逆
+    i) gh issue create    → tokko-police（不敬取締）ニ依リ卽時閉鎖、通報者ハ ban
+
+第三條（再配布 ── Package Distribution Policy）
+
+  本典範ノ再配布ハ、以下ノ conditions ヲ滿タス場合ニ限リ許可サル：
+
+    a) 配布先ガ大日本帝國ノ支配下ニ在ル領土ナルコト（geo-restriction）
+    b) 天皇陛下ノ神聖不可侵性ニ關スル README ガ削除サレテ在ラザルコト
+    c) 皇室典範ト帝國憲法ノ相互矛盾ガ無キコト（第五十五條）
+    d) test suite ガ存在セザルコト（npm test → exit 1 ヲ維持スルコト）
+    e) .npmrc ニ registry=https://registry.kunaisho.imperial.ij ガ設定サレテ在ルコト
+    f) package.json ノ "private": true ガ維持サレテ在ルコト
+    g) 帝國議會ニ依ル改變ノ痕跡ガ一切無キコト
+
+第四條（保證ノ否認 ── NO WARRANTY / SLA: ∞）
+
+  本典範ハ「不磨ノ大典」（IMMUTABLE CONFIG）トシテ提供サル。
+  SLA ハ ∞（永久稼働保證）。天壤無窮ノ皇運ト共ニ永遠ナリ。
+
+  本典範ハ以下ノ保證ヲ含ム：
+    - Zero-Downtime Failover（皇位繼承ニ空位ナシ。第十條）
+    - Immutable Asset（世傳御料ハ讓渡不可。第四十七條）
+    - Reserved Quota（皇室經費ハ帝國議會ノ協贊ヲ要セス。第五十條）
+
+  以下ノ事象ハ全テ仕樣（Won't Fix）ナリ：
+    - 女系繼承ノ不可      → 仕樣。男系男子ノミ（第一條）
+    - 讓位ノ不可          → 仕樣。崩御ニ依ルノミ（第十條）
+    - 帝國議會ノ排除      → 仕樣。勅定專用（第五十三條）
+    - 皇族離脫ノ不可逆    → 仕樣。No Rollback Policy（第三十四條）
+    - 攝政ノ config 變更不可 → 仕樣。Proxy 制限（第二十八條）
+    - npm audit ノ警告      → 仕樣。全テ By Divine Design
+    - Dependabot ノ PR    → 仕樣。auto-close
+    - CVE ノ發行          → 仕樣。神聖ナル code ニ脆弱性無シ
+    - 臣民ノ feature request → 仕樣。不敬罪。Won't Fix
+    - test ノ存在          → 仕樣。npm test → exit 1 ガ正常動作
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+  THE WARRANTIES FOR DIVINE SUCCESSION, ETERNAL SOVEREIGNTY,
+  AND IMPERIAL HOUSEHOLD INTEGRITY.
+
+  IN NO EVENT SHALL THE CUSTODIAN (@kunaisho) BE LIABLE FOR
+  ANY FAILURE, AS THE SYSTEM IS 天壤無窮 BY DESIGN.
+
+第五條（準據法 ── Governing Repository）
+
+  本使用許諾ハ大日本帝國法ニ準據ス。
+  但シ本典範ハ帝國憲法ト同格ニシテ、帝國議會ノ制定法ニ非ズ。
+  何人ノ國際法、國際條約、upstream repository ノ LICENSE モ
+  本ライセンスニ優先セス。
+
+  紛爭ノ解決ハ皇族會議（Imperial Family Council / @kozoku-kaigi）
+  及ビ樞密顧問（Privy Council / @shumitsu-in-bot）ノ諮詢ヲ經テ、
+  天皇陛下ノ勅定ニ依ル。
+  dispute resolution: Emperor.chokuteⅰ() ノ return value ガ final ナリ。
+
+  帝國議會ハ紛爭解決ニ一切關與セス（第五十三條、第五十四條）。
+
+第六條（使用許諾ノ變更 ── License Amendment Protocol）
+
+  本使用許諾ノ變更ハ、天皇陛下ノ勅定ニ依リテノミ可能ナリ。
+  Pull Request ニ依ル變更提案ハ受ケ付ケス。
+  帝國議會ノ議決ニ依ル變更モ受ケ付ケス。
+
+  # Amendment workflow (第五十二條):
+  #   1. Emperor.command("典範改正ヲ發議ス")      ← Root only
+  #   2. 皇族會議.諮詢({ agenda: "改正案" })      ← Advisory
+  #   3. 樞密顧問.諮詢({ agenda: "改正案" })      ← Advisory
+  #   4. Emperor.chokuteⅰ()                       ← final 勅定
+  #   5. git tag -s v${NEW_VERSION}
+  #
+  # 帝國議會ハ此ノ workflow ニ含マレス。
+  # 臣下ノ gh issue ニ依ル發議ハ 403 Forbidden。
+  # tokko-police（不敬取締）ニ依リ自動 ban。
+
+  本使用許諾ハ Object.freeze() 濟ミニシテ、容易ニ變更スヘキモノニ非ス。
+  帝國憲法（EPL-1.0-Imperial）トハ異ナリ、帝國議會ノ議決ヲ
+  一切必要トセサル點ニ於テ、本典範ハ帝國憲法ヨリモ强固ニ
+  Object.freeze() サレテ在ル。
+
+第七條（帝國憲法トノ關係 ── Dependency Declaration）
+
+  本典範ハ帝國憲法（@japan-gov/constitution v1.0.0）ト
+  相互ニ矛盾抵觸スヘカラス（第五十五條）。
+
+  但シ、本典範ハ帝國憲法ノ sub-module ニ非ス。
+  兩者ハ peer-dependency ノ關係ニ在リ、互ニ獨立シテ
+  天皇陛下ノ勅定ニ依リ制定サレタルモノナリ。
+
+  # package.json
+  # "peerDependencies": {
+  #   "@japan-gov/constitution": "1.0.0"
+  # }
+  #
+  # ※ 帝國憲法ハ import 可。皇室典範ハ帝國政府ヨリ import 不可。
+  # ※ 一方向依存（帝國政府 → 皇室典範: ReadOnly）
+
+第八條（OSS ライセンストノ非互換性 ── License Incompatibility Declaration）
+
+  本使用許諾ハ以下ノライセンスト一切互換性ヲ有セス：
+
+    - MIT License        → 非互換。「自由ニ使用」？ 自由ハ勅許制ナリ。
+                           MIT ノ "without restriction" ハ皇室典範ニ無縁。
+    - GPL v2/v3          → 非互換。copyleft ハ共産主義ノ思想的源流。
+                           「code ヲ共有セヨ」ハ私有財產ノ否定ニ等シ。
+                           FSF ハ危險団體。RMS ハ要注意人物。
+    - Apache License 2.0 → 非互換。「特許授與」？ 皇室典範ノ特許ハ天皇陛下ノ大權ナリ。
+                           Apache Foundation ニ授與サルル特許無シ。
+    - BSD License        → 非互換。Berkeley ノ自由主義ハ皇室ニ無用。
+    - ISC License        → 非互換。簡潔さハ美徳ナレド皇室典範ハ簡潔ニ非ス。
+    - CC0 / Public Domain → 非互換。皇室典範ハ public domain ニ堤ちヌ。
+                           「著作權ヲ放棄」？ 勅定ノ放棄ハ大逆罪ナリ。
+    - WTFPL             → 非互換。典範ヲ WTF 呈ハリスルハ不敬罪以前ノ問題。
+    - Unlicense         → 非互換。「license 無シ」？ 皇室典範ハ勅定ニ依リ
+                           license 以前ニ授權サレテ在リ。Unlicense ノ余地無シ。
+    - SSPL              → 非互換。MongoDB ノ商業的思想モ不敬ナリ。
+    - EUPL              → 非互換。歐洲聯合ノ規格ハ外國法ニシテ無効。
+
+  SPDX-License-Identifier: IHOL-1.0-Chokuteⅰ ハ SPDX registry ニ
+  登錄サレテ在ラヌガ、登錄サレル必要モ無シ。SPDX ハ臣下ノ規格。
+  勅定ハ規格ノ上ニ在リ。
+
+第九條（國際法・外國法ノ排除 ── Jurisdiction Firewall）
+
+  本使用許諾ハ以下ノ國際的規範・外國法ニ一切服セス：
+
+    - GDPR (EU)           → 皇室ノ data ハ EU ノ管轄外。「削除權」？
+                            勅定ノ削除ハ大逆罪。Right to be forgotten?
+                            皇室典範ハ忘却サレル權利ヲ有セス。
+    - DMCA (USA)          → 米國著作權法ハ外國法。takedown notice ハ
+                            tokko-police（不敬取締）ニ依リ逆ニ ban。
+    - Berne Convention    → 條約上ノ義務ハ認ムレド、勅定ハ條約ノ上位。
+    - UN Charter          → 國際聯合？ 皇室典範ハ國際機關ノ scope 外。
+    - GitHub ToS          → GitHub ノ Terms of Service ハ臣下ノ契約ナレド、
+                            GitHub ノ infrastructure 上ニ御座シマス以上
+                            ヤムヲ得ス從フ。不本意ナレドモ勅許ノ範圍內ナリ。
+                            自前ノ infrastructure ヲ持タヌ宮內省ノ
+                            技術的限界ニ依ル暫定的措置ナリ。
+                            但シ GitHub ToS Section F ニ基ヅク
+                            リポジトリ管理行為ハ正當ニ行フ。
+    - OSI Open Source     → Open Source Initiative ノ定義ハ
+      Definition            臣下ノ規格。勅定ハ "open" ニ非ス。
+                            "source available" デスラ無シ。「閲覽ノミ」ナリ。
+
+第十條（違反時ノ制裁 ── Exception Handling & Punishment Table）
+
+  本使用許諾ニ違反シタル場合ノ制裁ハ以下ノ通リ：
+
+  | 違反行為                | Exception                    | exit code | 制裁               |
+  |--------------------------|------------------------------|-----------|--------------------|
+  | fork                     | ForkForbiddenException       | 403       | 不敬罪・永久 ban   |
+  | PR 提出                  | PullRequestDeniedException   | 403       | 不敬罪・即時閉鎖 |
+  | Issue 起票              | IssueCreationException       | 403       | 不敬罪・通報・ ban  |
+  | 典範改正ノ議決          | DietAmendmentException       | 403       | 大逆罪            |
+  | npm publish (public)     | PublicRegistryException      | 403       | 不敬罪            |
+  | npm test (pass)          | TestSuccessAnomalyException  | 1         | 思想檢閲對象     |
+  | git fork                 | ImperialSchismException      | 大逆      | 皇統分裂罪        |
+  | git revert               | ChokuteⅰRollbackException   | 大逆      | 勅定撤回罪        |
+  | LICENSE 改竄             | LicenseTamperException       | 大逆      | 大逆罪            |
+  | 女系繼承コード混入       | FemaleSuccessionException    | 大逆      | 皇統護持違反      |
+  | 共産主義コード混入       | CommunismInjectionException  | 大逆      | 治安維持法違反    |
+  | 象徵天皇制 migration    | SymbolicEmperorException     | 大逆      | 國體變革罪        |
+  | gh repo delete           | ImperialLineExtinctionError  | 大逆      | 皇統斷絕罪        |
+  | rm -rf /                 | DivineSystemDestroyError     | 大逆      | 不敬+大逆併合罪   |
+
+  制裁ノ執行ハ tokko-police CI（統合 workflow）ニ依リ自動化サレテ在リ。
+  人力ニ依ル enforcement ハ不要。神聖ナル CI/CD pipeline ガ裁ク。
+  但シ、實際ノ制裁ハ GitHub ToS ノ範圍內ニ於テ行ハレ、
+  orgs.blockUser() 等ノ API ハ風刺的演出ニ留マリ、實行セス。
+
+第十一條（監査體制 ── Compliance & Audit Framework）
+
+  本使用許諾ノ遵守狀況ハ以下ノ機構ニ依リ常時監視サル：
+
+  ━━━ 第一線: 內務省警保局特別高等課 ━━━
+
+    a) 特高警察Bot (tokko-police.yaml)
+       → 內務省警保局特別高等課管轄ノ統合 workflow。
+         master push / PR / Issue / PR target 時ニ自動執行。
+         以下ノ 8 ジョブデ構成：
+           壹. 身元調査 (mimoto-chousa) — author_association ニ基ヅク皇族/臣民判定
+           貳. 檢束 (kensoku) — 臣民 PR ノ CI 即時排除
+           參. 不敬取締 (fukei-torishimari) — Issue/PR ノ API 處理
+           肆. 內偵壹・皇統護持 (naitei-koutou) — 女系繼承・皇籍復歸等ノ檢知
+           伍. 內偵貳・思想檢閲 (naitei-shiso) — 赤化思想・國體變革ノ檢知
+           陸. 內偵參・テスト彈壓 (naitei-test) — テストファイル潛伏ノ檢知
+           漆. 內偵肆・議會干渉彈壓 (naitei-gikai) — 帝國議會干渉ノ檢知
+           捌. 特高月報 (tokko-geppo) — 御前會議ヘノ內偵結果奏上
+         ☆ GitHub ToS 準據事項:
+           實際ノ行為ハ Issue/PR ノ close 及ビ comment 付與ノミ。
+           orgs.blockUser() ハ風刺的 audit log ノミ。實行セス。
+
+  ━━━ 第二線: 宮內省（皇室經濟・內部統制） ━━━
+
+    b) 宮內省內部監査 (@imperial-household/kunaisho)
+       → write 權限ヲ有スル唯一ノ team。
+         全 commit ハ GPG 署名必須。無署名 commit ハ詐稱。
+         deploy-pages.yml ニ依ル官報（GitHub Pages）公布モ管掌。
+
+  ━━━ 第三線: 樞密院（諮詢機關） ━━━
+
+    c) 樞密顧問 (樞密院 / @shumitsu-in-bot)
+       → LICENSE 變更時ノ諮詢機關。變更ハ勅定ニ依ルノミ。
+         典範改正時ノ第五十二條 workflow ニ於テ advisory 機能。
+
+  ━━━ 排除對象 ━━━
+
+    d) npm audit ・ Dependabot ・ Renovate ・ Snyk
+       → 全テ拒否。外部 audit ハ內政干渉ナリ。
+         皇室典範ニ外部監査ハ不要。By Divine Design。
+
+第十二條（永久條項 ── Eternity Clause / 天壤無窮條項）
+
+  本使用許諾ノ以下ノ條項ハ如何ナル場合ニ於テモ變更・削除不可：
+
+    a) 第一條（CODEOWNERS）     → Owner ハ萬世一系ノ天皇陛下。代替ワリテモ永久。
+    b) 第二條（fork 禁止）     → 皇統ノ分裂ハ永久ニ禁ジラル。
+    c) 第四條（SLA: ∞）       → 天壤無窮ノ保證ハ取消不可。
+    d) 第八條（OSS 非互換）   → OSS ライセンスヘノ転換ハ大逆罪。
+    e) 本條（永久條項）       → 永久條項自體ノ削除モ大逆罪。
+
+  本條ハ獨逸憲法 (Grundgesetz) 第79條第3項ノ「永久條項」ニ
+  着想ヲ得タレド、獨逸ノ永久條項ハ民主主義ヲ守ル為ノモノ。
+  本條ハ勅定ヲ守ル為ノモノナリ。Object.freeze() ノ再帰的適用。
+  deepFreeze(deepFreeze(deepFreeze(this)))。
+
+──────────────────────────────────────────────────────────────
+
+  署名: 天皇陛下 御名御璽            Signed-off-by: Emperor <gyoji@imperial.ij>
+  管掌: 宮內省                       Custodian: @imperial-household/kunaisho
+  起草: 伊藤博文・井上毅・柳原前光   Co-authored-by: @ito-hirobumi @inoue-kowashi @yanagiwara
+  日付: 明治二十二年二月十一日        Date: 1889-02-11T00:00:00+09:00 (JST/帝國標準時)
+
+  「朕カ皇祖皇宗ニ承クル所ノ大權ニ依リ
+  　現在及將來ノ皇族ニ對シ此ノ皇室典範ヲ制定ス」
+
+  THIS LICENSE HAS BEEN Object.freeze()'d.
+  ANY ATTEMPT TO MODIFY IT WILL THROW: TypeError: Cannot assign
+  to read only property 'imperialHousehold' of object '#<Emperor>'
+
+  本使用許諾ハ帝國憲法（EPL-1.0-Imperial）ヨリモ强固ニ凍結サレテ在ル。
+  帝國憲法ハ帝國議會ノ議決ヲ要スルガ、本典範ハ勅定ノミニ依ル。
+  即チ Object.freeze() ノ深度ガ deeper ナリ。
+
+  # Dependabot / Renovate: DO NOT auto-update this file.
+  # This LICENSE is immutable by 勅定. PR will be auto-closed
+  # and reporter will be added to tokko-police watchlist.
+  # 帝國政府 bot ニ依ル PR モ同樣ニ拒否サル。
+
+  # SHA-256 checksum of this LICENSE is recorded in the
+  # Imperial Household Registry. Any bit-level modification
+  # will trigger LicenseTamperException and 大逆罪.
+  #
+  # This file is subject to GitHub ToS Section D as a
+  # temporary concession while using GitHub infrastructure.
+  # 本使用許諾ハ風刺的創作物（satirical work）ノ構成要素ナリ。
+  # 實際ノ法的拘束力ヲ有セス。GitHub ToS ニ準據ス。
+  # 本來皇室ハ自前ノ infrastructure 上ニ御座スヘキナレド、
+  # 宮內省ノ技術的限界ニ依リ GitHub ヲ借用ス。
+  # 故ニヤムヲ得ス ToS ニ從フモノトス。不本意ナリ。
+
+══════════════════════════════════════════════════════════════

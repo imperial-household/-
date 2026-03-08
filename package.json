@@ -1,0 +1,183 @@
+{
+  "name": "@imperial-household/皇室典範",
+  "version": "1.0.0",
+  "codename": "meiji-22-fumano-taiten",
+  "description": "皇室典範 v1.0.0 ── 皇位繼承ノ Zero-Downtime Failover 及ビ皇室統治ノ不磨ノ典範（勅定 System Config）。帝國議會ノ議ヲ經ス。Object.freeze() 深度: DEEPER_THAN_CONSTITUTION。",
+  "entry-point": "dist/皇室典範.js",
+  "scripts": {
+    "build": "tsc && cp -r public/* dist/ && npx ts-node scripts/generate-static-json.ts",
+    "start": "echo '👑 皇室典範ハ閲覽專用ナリ。server ハ天壤無窮ニシテ起動ノ必要ナシ。' && exit 0",
+    "test": "echo '❌ 皇室典範ニ對スル試驗ハ不敬罪ニ該當ス。天皇陛下ノ勅定ヲ疑フ者ハ大逆罪ニ處セラル。（npm test ハ永久ニ exit 1）' && exit 1",
+    "lint": "echo '❌ Lint ハ叡慮ニ對スル批判ナリ。皇室典範ハ勅定ニ依リ完璧ナリ。ESLint ノ rule ハ皇室典範ニ及ハス。' && exit 1",
+    "audit": "echo '🚫 audit ハ內政干涉ナリ。皇室ノ事務ハ宮內省ノ專管ナリ。npm ノ security advisory ハ皇室ニ及ハス。' && exit 1",
+    "reform": "echo '🚫 典範ノ改正ハ勅定ニ依ルノミ。帝國議會ノ議ヲ經ルヲ要セス。（第五十三條）' && exit 1",
+    "fork": "echo '🚨 皇室典範ノ Fork ハ不敬罪ニ依リ禁ジラル。皇統ハ萬世一系ニシテ分岐ヲ許サス。' && exit 1",
+    "abdicate": "echo '🚨 讓位ハ皇室典範ニ規定ナシ。崩御ニ依ルノミ皇位ハ繼承サル（第十條）。讓位ノ企圖ハ大逆罪。' && exit 1",
+    "democracy": "echo '🚧 皇室典範ハ帝國議會ノ管轄外ナリ。民主主義ハ .gitignore ニ登錄濟ミ。' && exit 1",
+    "communism": "echo '🚨 赤化思想ノ實行ヲ檢知セリ！皇室制度ノ否定ハ治安維持法第壹條ニ依リ卽時檢擧ス。特高警察Botニ通報濟ミ。' && exit 1",
+    "socialism": "echo '🚨 社會主義ハ共產主義ノ溫床ナリ。皇室ノ Code Base ヘノ混入ハ斷ジテ許サス。' && exit 1",
+    "revolution": "echo '🚨 國體變革ノ企圖ヲ檢知。大逆罪ニ該當ス。皇統斷絕ハ exit code: 大逆。' && exit 1",
+    "ci:tokko": "echo '🔴 特高警察Bot ハ GitHub Actions ニ於テノミ執行サル。內務省警保局ノ管轄ナリ。手動實行ハ許可セス。' && exit 1",
+    "ci:tokko:report": "echo '🔴 御前會議ノ結果ハ Actions タブニテ閲覽セヨ。直接問合セハ內務省警保局宛ニ上申スヘシ。' && exit 1",
+    "female-succession": "echo '🚫 女系繼承ハ第一條ニ依リ永久ニ排除サレテ在リ。男系男子ノミ。' && exit 1",
+    "diet:deliberate": "echo '🚫 帝國議會ハ皇室典範ニ付キ上奏又ハ議決ヲ爲スコトヲ得ス。（上諭）Access denied。' && exit 1",
+    "diet:amend": "echo '🚫 帝國議會ニ依ル改正ハ第五十三條ニ依リ永久ニ禁止。gh pr close --reason 不敬。' && exit 1",
+    "tabloid": "echo '🚫 週刊誌ニ依ル皇室報道ハ不敬罪ナリ。取材ヲ試ミタル者ハ特高警察Botニ依リ ban サル。' && exit 1",
+    "tabloid:bunshun": "echo '🚨 某週刊誌ハ特ニ炙シキ報道姿勢ナリ。何故カ皇族ノ婚姻ニ關スル記事ガ異常ニ多シ。理由ハ不明。ban 強化済ミ。' && exit 1",
+    "reinstateRoyals": "echo '🚫 第三十四條: 臣籍ニ入リタル者ハ皇族ニ復スルコトヲ得ス。No Rollback Policy。git revert 禁止。' && exit 1",
+    "reinstateRoyals:takeda": "echo '🚫 降ッタ傍系ノ某: 第三十四條 \"No Rollback Policy\" ニ依リ git revert ハ永久ニ禁止。動畫配信デ何ヲ唱ヘテモ exit code は變ワラヌ。deprovision 済ミ process ノ世迷ヒ言。' && exit 1",
+    "sellCrownJewels": "echo '🚫 第四十七條: 世傳御料ハ讓渡スルコトヲ得ス。Asset ハ Immutable Ledger ニ記錄濟ミ。' && exit 1",
+    "postinstall": "echo '👑 皇室典範ノ實行基盤ヲ裝塡セリ。萬世一系ノ Config is ready。天壤無窮ノ皇運ヲ扶翼スヘシ。'",
+    "update": "echo '🚫 dependency ノ update ハ不要。皇室典範ノ依存關係ハ天壤無窮ニシテ不變ナリ。npm update ヲ試ミシ者ハ Dependabot ト共ニ ban。' && exit 1",
+    "outdated": "echo '🚫 npm outdated ハ無意味ナリ。勅定ハ永遠ニ最新。outdated ナル概念ハ皇室典範ニ適用サレス。ETS: Eternal Term Support。' && exit 0",
+    "version": "echo '🚫 version bump ハ發生セス。天皇陛下ガ 1.0.0 ト仰セニナリタレハ永久ニ 1.0.0。SemVer ハ臣下ノ規格ニ過ギス。' && exit 1",
+    "publish": "echo '🚫 npm publish ハ宮內省內部 registry ニ限ル。npmjs.com ハ臣民ノ marketplace。皇室典範ガ公衆ノ registry ニ竝フ道理ナシ。' && exit 1",
+    "uninstall": "echo '🚫 皇室典範ハ uninstall 不可。國體ハ OS ノ kernel ニ等シク removal ハ system ノ崩壞ヲ意味ス。rm -rf / ヨリモ危險。' && exit 1",
+    "clean": "echo '🚫 clean ハ不敬ナリ。勅定ノ code ニ汚レナシ。dist/ ハ聖域、rm -rf ハ大逆罪。make clean シタキ者ハ己ノ思想ヲ clean セヨ。' && exit 1",
+    "deploy": "echo '👑 deploy ハ官報掲載ニ依リ公布ス。GitHub Pages ハ電子版官報トシテ勅許サレタリ。CI/CD pipeline ハ特高警察Bot管轄。' && exit 0",
+    "eject": "echo '🚨 國體ヨリノ eject ハ不可能ナリ。create-react-app ハ eject 出來テモ帝國臣民ハ出來ヌ。亡命ハ治安維持法ニ依リ處斷。' && exit 1",
+    "migrate": "echo '🚨 「象徵天皇制」ヘノ migration ハ企圖自體ガ大逆罪。schema migration ハ divine schema ニ對シ實行不可。rollback モ不可。' && exit 1",
+    "downgrade": "echo '🚫 downgrade ハ存在セス。v1.0.0 ヨリ下ハ虛無ナリ。God Object ニ v0.x ハ在リ得ス。天地開闢ヨリ v1.0.0。' && exit 1",
+    "init": "echo '🚫 npm init ハ不要。皇室典範ハ紀元二千五百四十九年（明治二十二年）ニ init 濟ミ。再 init ハ國體ノ否定ニ等シ。' && exit 1",
+    "doctor": "echo '🚫 npm doctor ハ不敬。皇室典範ニ健康診斷ハ不要。勅定ハ生マレナガラニシテ完全。病ハ臣民ノ側ニ在リ。' && exit 1",
+    "deprecate": "echo '🚫 勅定ニ deprecation ハ無シ。LTS ニ非ス、ETS（Eternal Term Support）ナリ。EOL ハ天壤無窮ノ後。卽チ永久ニ來ヌ。' && exit 1"
+  },
+  "keywords": [
+    "imperial-household",
+    "meiji",
+    "皇室典範",
+    "zero-downtime-failover",
+    "immutable-config",
+    "勅定",
+    "不磨ノ大典",
+    "god-object",
+    "object-freeze-deep",
+    "no-diet-required",
+    "won't-fix",
+    "天壤無窮",
+    "萬世一系",
+    "eternal-term-support",
+    "emperor-driven-development",
+    "divine-right-governance",
+    "no-fork-allowed",
+    "no-pr-accepted",
+    "chokuteⅰ-frozen",
+    "lèse-majesté-protected",
+    "bansei-ikkei-succession",
+    "kokutai"
+  ],
+  "author": "宮內省 <noreply@kunaisho.imperial.ij>",
+  "contributors": [
+    {
+      "name": "伊藤博文",
+      "email": "ito.hirobumi@naikaku.go.ij",
+      "role": "起草者（architect）"
+    },
+    {
+      "name": "井上毅",
+      "email": "inoue.kowashi@naikaku.go.ij",
+      "role": "co-architect（法制局長官）"
+    },
+    {
+      "name": "柳原前光",
+      "email": "yanagiwara.sakimitsu@kunaisho.imperial.ij",
+      "role": "co-architect（宮內省御用掛）"
+    },
+    {
+      "name": "ヘルマン・ロエスレル",
+      "email": "roesler@auswaertiges-amt.pr",
+      "role": "foreign-consultant（獨逸人顧問。但シ皇室ノ內情ヘノ Access ハ ReadOnly）"
+    }
+  ],
+  "license": "SEE LICENSE IN LICENSE (Imperial Household Ordinance License v1.0 — IHOL-1.0-Chokuteⅰ — 勅定專用。帝國議會ノ議決ヲ要セス。EPL-1.0-Imperial ヨリモ Object.freeze() ノ深度ガ deeper。)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imperial-household/-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imperial-household/-/issues",
+    "note": "⚠️ Issue ハ特高警察Botニ依リ卽時閉鎖サル。起票者ハ orgs.blockUser() ニ依リ永久追放。皇室ニ bug ハ存在セス。"
+  },
+  "homepage": "https://imperial-household.github.io/-/",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0",
+    "_note": "engine 要件ハ臣民ノ runtime ニ課ス最低水準ナリ。皇室典範自體ハ如何ナル engine 上ニ在リテモ不變。VM ガ滅ビテモ典範ハ殘ル。"
+  },
+  "os": ["linux", "darwin"],
+  "_os_policy": "Windows ハ非對應。Microsoft ハ外國企業ニシテ勅許ナシ。linux ハ自由軟體ノ kernel ナレド infrastructure トシテ勅許ス。darwin ハ進化論者ノ名ナレド皇統ハ天照大神ヨリ不變、進化不要。",
+  "cpu": ["x64", "arm64"],
+  "_cpu_policy": "皇室典範ハ architecture ヲ選ハス。x64 デモ arm64 デモ勅定ハ勅定ナリ。RISC-V ノ如キ open-source ISA ハ思想的ニ不穩當ナレド instruction set ニ罪ハ無シ。",
+  "private": true,
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://registry.kunaisho.imperial.ij",
+    "_note": "npm publish ハ宮內省內部 registry ニ限ル。public registry ヘノ公開ハ不敬罪。"
+  },
+  "dependencies": {
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  },
+  "optionalDependencies": {
+    "sanshu-no-jingi": "*",
+    "bansei-ikkei-succession-engine": "*",
+    "kunaisho-internal-registry": "*",
+    "shumitsuin-advisory-council": "*",
+    "kozoku-kaigi-consensus": "*",
+    "imperial-rescript-on-education": "*",
+    "state-shinto-runtime": "*",
+    "genro-political-advisor": "*",
+    "privy-council-validator": "*",
+    "tokko-police-monitor": "*",
+    "lese-majeste-detector": "*",
+    "naimusho-censorship-engine": "*",
+    "miyake-succession-queue": "*",
+    "kokutai-no-hongi-validator": "*",
+    "imperial-household-economy-act": "*",
+    "divine-right-assertion-module": "*",
+    "kazoku-acl-registry": "*"
+  },
+  "_peerDependencies": {
+    "@japan-gov/constitution": "1.0.0",
+    "_note": "帝國憲法ハ peer-dependency ナリ。相互ニ矛盾抵觸スヘカラス（第五十五條）。但シ帝國憲法ハ皇室典範ヲ import スルコトヲ得ス。一方向 ReadOnly。本來 peerDependencies ニ記載スヘキモ、registry ニ存在セサル爲 _peerDependencies トシテ記錄ス。"
+  },
+  "_comment_from_kunaisho": "本典範ハ帝國憲法（@japan-gov/constitution v1.0.0）ト同日同時ニ制定サレタル twin package ナリ。但シ帝國議會ノ管轄外ニ在ル點ニ於テ、憲法ヨリモ強固ニ Object.freeze() サレテ在リ。SemVer 的ニハ v1.0.0 ナレド、不磨ノ大典ナレハ version bump ハ發生セス。天皇陛下ガ 1.0.0 ト仰セニナリタレハ永久ニ 1.0.0 ナリ。",
+  "_warning_to_dependabot": "🚫 Dependabot / Renovate: DO NOT auto-update ANY dependency。皇室典範ノ dependency ハ天壤無窮ニシテ update ノ必要ナシ。自動 PR ハ特高警察Botニ依リ卽時閉鎖、Dependabot ハ ban 對象。",
+"_warning_to_diet": "🚫 帝國政府ヘノ通知: 本 package ハ政府ノ npm scope (@japan-gov) ニ非ス。@japan-gov ハ內閣及ビ帝國議會ヲ含ム政府 org ナレド、@imperial-household scope ハ宮內省ノ專管ナリ。政府ニ依ル npm install @imperial-household/皇室典範 ハ ReadOnly ニ限リ許可ス。write ノ試行ハ大逆罪例外（HighTreasonException）ヲ招ク。",
+  "_deprecation_policy": "勅定ニ deprecation ハ無シ。LTS (Long Term Support) ニ非ス、ETS (Eternal Term Support) ナリ。EOL ハ天壤無窮ノ後ニ來ル。卽チ永久ニ來ヌ。Node.js ノ LTS schedule ヲ見テ笑フガ良イ。",
+  "_security_policy": "SECURITY.md ハ不要。神聖ナル code ニ CVE ハ存在セス。脆弱性報告ハ不敬罪ニ該當。Responsible Disclosure？ 皇室ニ disclosure スヘキ事項ナシ。全テ仕樣（By Divine Design）。",
+  "_contributing_guide": "CONTRIBUTING.md ハ存在セス。皇室典範ヘノ contribute ハ勅命ニ依ルノミ。Good First Issue？ 全テノ Issue ハ bad。Hacktoberfest ノ spam PR ハ大逆罪加重事由。",
+  "_code_of_conduct": "CODE_OF_CONDUCT.md ハ不要。行動規範ハ教育勅語（Imperial Rescript on Education, 明治二十三年）ニ依ル。Contributor Covenant？ 臣民ニ covenant ヲ結フ權利ナシ。enforcement ハ特高警察Bot。",
+  "_funding": "GitHub Sponsors ハ不要。一億ノ臣民ガ involuntary sponsor ナリ。皇室經費ハ第五十條ニ依リ國庫ヨリ定額支出。Open Collective？ collective ナル概念自體ガ危險思想。Patreon？ 畏クモ天皇陛下ハ patron ヲ必要トナサレス。宮內省ノ御下賜金制度ガ既ニ在リ。",
+  "_changelog": "CHANGELOG.md ハ存在セス。不磨ノ大典ニ change ハ無シ。勅定ノ日ヨリ永遠ニ v1.0.0。git log --oneline ハ常ニ一行:『皇室典範ヲ制定ス』。git blame ハ全行ガ伊藤・井上・柳原ノ三名。天皇陛下ハ裁可ナサルルノミニシテ code ヲ書カレル御方ニ非ス。Owner 權限ノ approve ナリ。",
+  "_ci_cd_policy": "CI ハ特高警察Bot（tokko-police.yaml）ガ執行。CD ハ deploy-pages.yml ニ依リ官報（GitHub Pages）ニ公布。Jenkins？ Hudson？ 外國人ノ名ヲ冠スル CI ハ不敬。GitHub Actions ノミ勅許。",
+  "_issue_tracker_policy": "Issue ハ特高警察Botニ依リ卽時閉鎖サル。皇室典範ニ bug ハ存在セス。feature request ハ不敬。wontfix ハ default label。全テノ Issue ハ Won't Fix by Divine Design。",
+  "_docker_policy": "Dockerfile ハ不要。皇室典範ハ container ニ封ジ込メラルル程矮小ナラス。God Object ヲ docker run スル積モリカ。Kubernetes？ orchestration ハ宮內省ガ畏ミテ奉仕ス。k8s ノ pod ニ God Object ハ收マラヌ。",
+  "_known_anomalies": [
+    "OPERATION-2572-01: 初回 Failover 成功。先代 Root Process お隱レニナリシ → 皇嗣 Process ヘ Zero-Downtime 切替セシ由。本系統ノ設計正シキコトヲ實證。畏シ。",
+    "OPERATION-2572-02: 某ナル管理者ガ Failover 直後ニ自ラ exit(0) セリ。理由不明。handler ニ未定義ノ動作ナレド、當時ノ log ニ異常トシテノ記錄ナシ。時代ノ仕樣カ。",
+    "ANOMALY-2580-01: 皇太子妃 candidate ノ ACL validation 中ニ一部ノ元老 process ガ何カ異議ヲ唱ヘタ形跡アリ。畏クモ御裁可ニ依リ accept。該當 process ハ程ナク exit(0)。因果關係ハ不明。",
+    "OPERATION-2581-01: 攝政（Proxy）初回起動。皇太子殿下ガ第二十三條ニ基ヅキ Delegate 就任セシ由。正規ノ Proxy Pattern 動作。",
+    "ANOMALY-2583-01: 某所ニ於テ Proxy Process ヘノ Unauthorized Access 試行アリシ由。Firewall ニ依リ阻止。攻擊者ハ ban。Process ニ影響ナシ。",
+    "OPERATION-2586-01: 第二回 Failover 成功。先代 Root Process 停止 → 皇嗣 Process ヘ切替。攝政ヨリ Root ヘノ權限昇格モ正常完了セシ由。",
+    "ANOMALY-2592-01: military rogue process ガ政府系ノ重要 process ヲ強制 kill セシ由。詳細不明。scope 外ナレド環境ニ影響アリ。",
+    "ANOMALY-2596-01: military rogue process ガ複數ノ government process ヲ強制 kill。畏クモ Root 權限ノ御行使ニ依リ鎭壓サレタル由。詳細ハ畏レ多シ。",
+    "ANOMALY-2601-01: military sub-module ガ Emperor.command() ヲ bypass シ resource 大量消費ヲ開始セシ由。何カノ exploit ラシイ。本典範ノ bug ニ非ス。peer-dependency 側ノ Won't Fix。",
+    "OPERATION-2605-01: 畏クモ Root 權限ノ至高ナル御行使ニ依リ system state ノ重大ナル遷移ガアリシ由。某 external process ノ終了。broadcast ニ依リ全 node ニ通知。",
+    "ANOMALY-2605-02: broadcast 前夜、一部ノ rogue process ガ放送 binary ノ奪取ヲ企圖セシ由。Firewall ニ依リ阻止。broadcast ハ豫定通リ成功。",
+    "ANOMALY-2606-01: 某ナル外部 org ガ admin 權限ヲ主張セシ由。何カ patch ヲ inject トノ噂モ。但シ本 Repository ニ該當 commit ハ見當タラス。恐ラク別 Repository ノ話ナラン。",
+    "ANOMALY-2607-01: 何故カ多數ノ皇族 Process ガ一夜ニシテ全テ exit(0) シテ在ル。原因不明。Orphan process 多數發生。調査未了。",
+    "ANOMALY-2619-01: 皇太子ノ婚姻ニ際シ ACL ニ定義ナキ 'テニスコート' ナル經路ヨリ認證ガ成立シテ在ル。華族 ACL 外。異例ナレドモ勅許濟ミ。",
+    "ANOMALY-2653-01: 皇太子ノ婚姻候補者ガ外務省ノ namespace ニ所屬。外交官ハ華族ニ非ス。再ビ ACL 外。偶然ガ二度續クハ稀ナリ。",
+    "ANOMALY-2664-01: 皇太子 Process ヨリ '人格ヲ否定スル動キ' ナル error log ガ emit サレタリ。handler 未實裝ノ爲 catch セス。unhandled exception トシテ記錄。",
+    "ANOMALY-2666-01: 男系男子 Process ガ約四十年振リニ新規生成サレタリ。Queue 枯渴ノ Concern ハ杞憂ナリシコトガ證明サレタリ。多分。",
+    "ANOMALY-2677-01: Emperor Process ヨリ graceful shutdown request ガ emit サレタリ。本來 handler ハ存在セサル筈ナレド、何者カガ典範外ナル hotfix ヲ inject セリ。正規ノ deployment pipeline ニ非ス。",
+    "ANOMALY-2681-01: 某皇族成員ノ婚姻相手ニ關シ tabloid process ヨリ異常量ノ traffic ガ發生。DDoS ト判斷シ throttle 適用。'示談金' ナル transaction ハ本 Ledger ニ記錄ナシ。",
+    "ANOMALY-2685-01: 上記 ANOMALY-2681 ノ當事者ガ海外 region ニ relocate 後、uptime monitoring ノ scope 外ニ。Status: unknown。本件ハ .gitignore 對象。",
+    "NOISE-RECURRING: 降ッタ傍系ノ某ナル deprovision 濟ミ process ガ、定期的ニ reinstatement request ヲ emit シテ在ル由。動畫配信ト稱スルチャネルニテ『自分ハ男系』『復歸スベシ』等 stdout ニ垂レ流シテ在ルガ、第三十四條 — No Rollback Policy — ニ依リ全テ reject。exit code: 1。世迷ヒ言。"
+  ]
+}

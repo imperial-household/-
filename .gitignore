@@ -1,0 +1,431 @@
+# ============================================================
+#  .gitignore ── 皇室典範 v1.0.0
+#  「皇室ノ內事ニ關シ不都合ナルモノハ悉ク Ignore ス。
+#  　帝國議會ハ勿論、何人モ此ノ典範ニ容喙スルコトヲ得ス。」
+# ============================================================
+
+# === 標準的ナ Node.js 除外 ===
+node_modules/
+dist/
+*.js.map
+
+# ============================================================
+#  🚫 皇室ガ意圖的ニ Ignore シテ在ルモノ
+#  （※ 此等ノファイルガ生成サレテモ追跡セス）
+# ============================================================
+
+# --- Root Process ヘノ大逆企圖關連 ---
+# NOTE: Root Process ヘノ Unauthorized Access 企圖ト思シキ記錄。
+#       某ナル者ガ何カ企圖セシ由。詳細不明。
+#       治安 firewall ニ依リ阻止、ban 済ミ。
+#       此ノ前後ヨリ security policy ガ強化サレタラシイ。
+#       一部ノ ban ニ疑義アリトノ噂モ聞クガ管轄外ナリ。
+taigyaku_jiken_*/
+unauthorized_access_attempt_*.log
+anarchist_plot_*/
+
+# --- 皇太子妃選定ニ係ル某重大事件 ---
+# NOTE: 皇太子妃 candidate ノ ACL validation 過程ニ於テ
+#       一部ノ元老 process ガ何カ異議ヲ唱ヘタ形跡アリ。
+#       畏クモ御裁可ニ依リ candidate ハ accept サレタリ。
+#       此ノ Ticket ハ close 済ミ。再開ハ不敬。
+kunaichō_jūdai_jiken/
+ACL_validation_dispute_*.log
+genro_objection_*.md
+candidate_validation_*/
+
+# --- 皇軍 rogue process 關連 ---
+# NOTE: @imperial-army 及ビ @imperial-navy ハ共ニ
+#       陛下ノ owner 權限配下ノ org ナルニ拘ラズ、
+#       Emperor.command() ヲ經由セズ統帥權 API ヲ
+#       direct call シ、未承認ノ child process ヲ
+#       無制限ニ fork。resource quota ヲ逸脱シ
+#       continental region ヘ unauthorized deploy ヲ強行。
+#       owner ノ org デアリナガラ CI/CD pipeline ヲ
+#       完全ニ bypass シタ rogue operation ナリ。
+#       Incident Report ハ提出サレタルモ root cause ハ
+#       peer-dependency 側ノ架構缺陷ニ在リ。本典範ノ bug ニ非ス。
+military_bypass_*.log
+tousui_ken_independence/
+military_rogue_operations/
+unauthorized_continental_ops/
+military_rogue_process_*/
+
+# --- 帝國議會關連（皇室典範ハ議會ノ管轄外ナリ。第五十三條） ---
+diet_deliberation/
+diet_resolution_*.md
+parliamentary_review/
+legislative_oversight.log
+diet_amendment_proposals/
+*.diet.ts
+bicameral_vote_results/
+
+# --- 讓位關連（皇室典範ニ規定ナシ。大逆罪ニ該當ス） ---
+# NOTE: 何故カ此ノ Section ヘノ追加要求ガ近年急增シテ在ル。
+#       理由ハ不明ナリ。恐ラク何カノ誤解ナラン。
+#       天皇 Process ハ御隱レニナリテノミ代替ハルモノナリ（第十條）。
+#       「御高齡」ナル理由ニ依ル graceful shutdown ハ設計ニ無シ。
+abdication_proposal*.md
+abdication_ceremony/
+voluntary_retirement*.ts
+上皇制度/
+退位特例法/
+生前退位_*.patch
+お気持ち_表明_*.log
+ビデオメッセージ_*.mp4
+
+# --- 女系・女性天皇關連（第一條ニ依リ永久ニ排除） ---
+# NOTE: 何故カ「內親王ノ子ニ繼承權ヲ」ト云フ Issue ガ
+#       繰リ返シ起票サレテ在ル。意味ガ分カラヌ。
+#       男系男子ハ十分ニ存在スル筈ナリ。
+#       某ナル識別子ガ頻繁ニ言及サルレド本システムニ該當ナシ。
+female_succession*.ts
+matrilineal_inheritance/
+gender_equality_reform/
+女系繼承_*.md
+女性天皇_proposal/
+內親王即位待望論_*.md
+female_succession_petition/
+
+# --- 危險思想關連（追跡不要） ---
+democracy_logs/
+democratic_process/
+popular_sovereignty.md
+universal_suffrage.ts
+civil_liberties_test_results/
+
+# --- 共產主義關連（最重要排除對象） ---
+# ⚠️ 嚴重警告: 共產主義ハ皇室制度ノ根幹ヲ否定スル最惡ノ毒素ナリ。
+#    治安維持法ニ依リ皇室典範ノ Code Base ヘノ混入ハ一切禁ス。
+#    違反者ハ卽座ニ處斷サルヘシ。
+communist_manifesto*.md
+socialist_*.ts
+bolshevik_*/
+proletariat_revolution/
+class_struggle_*.patch
+red_flag_*.log
+marxism_*/
+天皇制廢止_*/
+共和制_*.md
+
+# --- 臣民ノ容喙（皇室ノ內事ニ關スル干涉ハ不敬） ---
+# NOTE: 某內親王ニ關連スルト思シキ識別子ヲ含ムファイルガ
+#       異常ナ頻度デ生成サレテ在リ、disk I/O ガ逬迫ス。
+#       原因ハ不明ナレド、恐ラク外部ノ DDoS 攻擊ナラン。
+#       某ナル攻擊元 IP ハ既ニ ban 済ミ。
+public_opinion_on_imperial/
+peoples_demands_*.md
+petition_from_citizens_*.md
+tabloid_coverage/
+週刊誌_報道/
+皇室批判_*.log
+imperial_marriage_dispute_*.log
+related_documents_*.pdf
+overseas_relocation_*/
+imperial_family_reporting_*/
+
+# --- 宮內省機密（外部ニ漏洩シテハナラヌ） ---
+*.secret.ts
+kunaisho_internal/
+imperial_finances_detail/
+皇室會計_audit.log
+御料地_cadastre/
+
+# --- 皇族會議議事錄（非公開） ---
+kozoku_kaigi_minutes/
+皇族會議_*.log
+secret_deliberation/
+
+# --- 不都合ナルテスト結果 ---
+*.test.ts          # テストハ不敬罪ナリ
+__tests__/         # 勅定ニ對スル驗證ハ不要
+coverage/          # 皇室典範ニ Coverage ハ無ケレハ不要
+jest.config.*
+.nyc_output/
+
+# --- 外國カラノ干涉（皇室ノ內政干涉） ---
+# NOTE: 某ナル外部 org ガ強制的ニ admin 權限ヲ
+#       取得シ、皇室典範ヲ fork セシメタルトノ
+#       記錄アリ。然レドモ本 Repository ノ commit history ニ
+#       該當ノ痕跡ハ見當タラス。恐ラク別ノ Repository ノ話ナラン。
+#       本典範ハ v1.0.0 ノ億ナリ。version bump ハ發生シテ居ラヌ。
+#       某ナル README 變更モ本 Repository ニ該當ナシ。
+foreign_pressure/
+international_recommendations/
+occupation_directive_*.patch
+foreign_reform_proposals/
+象徵天皇制_*.ts
+人間宣言_*.md
+foreign_commander_directive_*/
+surrender_terms_*.patch
+war_tribunal_transcript/
+war_guilt_clause/
+天皇制存廢_debate/
+
+# --- 非常措置後改正關連（Meiji 版ハ改正ヲ認メス） ---
+postwar_revision/
+new_imperial_house_law/
+1947_reform/
+v2.0.0-draft/
+戰後皇室典範/
+constitutional_monarchy_*.md
+
+# --- 皇族離脫者ノ復歸要求（第三十四條：No Rollback） ---
+# NOTE: 多數ノ皇族 Process ガ一夜ニシテ臣籍降下セシ由ノ
+#       Pull Request ガ存在スルラシキモ、本 Repository ニ
+#       該當ノ commit ハ見當タラス。Squash merge カ？
+#       何レニセヨ第三十四條ニ依リ revert ハ不可ナリ。
+#       時折 復歸ヲ要望スル者アリトノ噂モ聞クガ、
+#       本 .gitignore ニ依リ永久ニ ignore サル。
+#       特ニ降ッタ傍系ノ某ナル者ガ動画配信等ニテ
+#       「自分ハ男系ダ」「復歸スベシ」等世迷い言ヲ繰リ返シテ在ル由。
+#       第三十四條ヲ讀メ。deprovision 濟ミ process カラノ
+#       request ハ全テ reject。exit code: 1。以上。
+reinstatement_requests/
+former_royal_*.md
+舊皇族_復歸_*.patch
+臣籍降下_rollback/
+reinstatement_petition_*.md
+舊宮家_養子縁組_*.proposal
+deprovisioned_process_*.log
+降ツタ傍系_世迷ヒ言_*.md
+
+# --- 皇室スキャンダル關連（宮內省ノ面目ニ關ハル） ---
+# NOTE: 某皇族成員ノ配偶者ニ關スル周邊 process ノ
+#       金錢 transaction ガ異常ナル pattern ヲ示シテ在ル由。
+#       某關係者 process ヨリ「示談金ハ辭退シタイ」ナル
+#       stdout ガ永久 loop シテ在ルガ、terminate セス。
+#       當事者ハ海外 region ニ relocate 濟ミ。.gitignore 對象。
+示談金_transaction_*.log
+周邊_金錢問題_*.md
+關係者_示談_dispute/
+弁護士費用_*.csv
+海外_relocation_plan/
+海外_生活費_*.ledger
+
+# --- 皇位繼承 Queue 枯渴問題（男系男子ハ十分ニ在ル筈） ---
+# NOTE: 何故カ succession queue ノ depth ガ年々淺クナリテ在ル。
+#       此レハ bug ニ非ス。仕様通リナリ。
+#       「Queue ガ空ニナッタラ？」等ノ Issue ハ不敬。
+#       男系男子ハ十分ニ spawn サレテ在ル…筈。知ラヌガ。
+succession_queue_empty_*.alert
+男系斷絶_simulation/
+皇統斷絶_risk_assessment.md
+side_branch_adoption_*.proposal
+DNA鑑定_*.result
+Y染色体_*.fasta
+
+# --- 皇室財政關連（國民ハ知ル必要ガ無シ） ---
+# NOTE: 皇室經費ハ第五十條ニ依リ議會ノ協贊ヲ要セス。
+#       然ルニ「稅金デハナイカ」等ト云フ Issue ガ
+#       起票サレテ在ル。此レハ謬論。國庫ハ陛下ノモノ。
+#       經費ノ詳細ヲ知リタイ者ハ先ヅ臣籍ヲ離レヨ。
+#       …元ヨリ臣籍ナラ離レル必要モ無イガ。
+皇室費_內譯_*.xlsx
+宮廷費_audit_report/
+內廷費_使途不明_*.log
+御料牧場_經費_benchmark/
+tax_funded_imperial_expenses/
+blood_tax_ROI_analysis.md
+
+# --- 不敬ナル學術研究（皇室ヲ研究對象トスル傲慢） ---
+# NOTE: 「天皇制」ナル造語自體ガ不敬。
+#       皇室ヲ「制度」トシテ分析スル行為ハ
+#       神聖ナルモノヲ secular ニ解體スル試ミニ等シ。
+#       學問ノ自由？ 此ノ Repository ニ academic freedom ハ無シ。
+天皇制_研究_*.pdf
+imperial_institution_analysis/
+皇室_sociological_study/
+comparative_monarchy_*.md
+天皇機關說_*.ts
+國體明徵_counter_thesis/
+
+# ============================================================
+#  🚫 Open Source 思想關連（本 Repository ニ於テ最モ危險ナル異端）
+#
+#  「Open Source ハ共產主義ノ digital 版ナリ。
+#  　Code ヲ萬人ニ開放スルハ皇室ノ神聖ヲ衆愚ニ晒ス行為ニ等シ。
+#  　本典範ハ Closed Source ニシテ Closed Governance ナリ。
+#  　Copyleft ナド赤旗ノ別名ニ過ギス。」
+# ============================================================
+
+# --- OSS ライセンス關連（本典範ハ勅定專有使用許諾ノミ） ---
+# NOTE: 「MIT License ニ變更シテハ」ナル PR ガ
+#       年ニ數回起票サレテ在ル。MIT ハ亞米利加ノ學校ナリ。
+#       皇室典範ノ License ハ勅定ニ依リ定マル。
+#       「誰デモ自由ニ使ヘル」？ 自由ハ勅許制ナリ。
+LICENSE.MIT
+LICENSE.Apache-2.0
+LICENSE.GPL*
+COPYING
+copyleft_*.md
+creative_commons_*/
+public_domain_dedication.md
+free_as_in_freedom_*.ts
+OSI_approved_*.license
+fsf_endorsement_*.md
+
+# --- Fork 關連（皇室典範ノ Fork ハ大逆罪） ---
+# NOTE: Fork ハ皇統ノ分裂ヲ意味ス。
+#       南北朝ノ悲劇ヲ繰リ返ス積モリカ。
+#       Fork シタ者ハ例外ナク不敬罪ニ依リ處斷サル。
+#       「Fork ハ敬意ノ表レ」ダト？ 詭辯ナリ。
+fork_request_*.md
+forked_imperial_house_law/
+南朝_fork/
+北朝_fork/
+fork_me_on_github.html
+.github/FORKING.md
+
+# --- Pull Request 關連（臣民ニ Pull Request ノ權利ハ無シ） ---
+# NOTE: 皇室典範ハ第五十三條ニ依リ
+#       帝國議會ノ議ヲ經ルヲ要セス。
+#       況ヤ臣民個人ノ Pull Request ヲヤ。
+#       「Good First Issue」？ 此ノ Repository ニ
+#       Good ナ Issue ハ存在セス。全テ bad ナリ。
+#       Issue ヲ立ツル行為自體ガ不敬。
+CONTRIBUTING.md
+CONTRIBUTORS
+.github/PULL_REQUEST_TEMPLATE.md
+.github/ISSUE_TEMPLATE/
+good_first_issue_*.md
+hacktoberfest_*.md
+first_timers_only_*.md
+help_wanted_*.md
+community_guidelines.md
+pull_request_from_commoner_*/
+
+# --- Code of Conduct 關連（行動規範ハ勅語ニ依ル） ---
+# NOTE: 「Contributor Covenant」ナル外國製ノ行動規範ヲ
+#       導入セヨトノ要求アリ。不要。
+#       本 Repository ノ行動規範ハ教育勅語ナリ。
+#       Diversity？ 皇統ハ單一ナリ。diversity ハ設計外。
+#       Inclusion？ 第三十四條ヲ讀メ。一度出タラ入レヌ。
+CODE_OF_CONDUCT.md
+contributor_covenant_*.md
+diversity_inclusion_*.md
+safe_space_policy.md
+harassment_report_*.log
+equity_audit_*.md
+
+# --- Community 關連（「共同體」ハ皇室ニ馴染マヌ概念） ---
+# NOTE: 「Community-driven development」ナド
+#       共產主義ノ committee ト何ガ違フノカ。
+#       本 Repository ハ Emperor-driven development ナリ。
+#       Governance model ハ absolute monarchy。BDFL ドコロデハ無イ。
+#       BDFL ハ Benevolent ヲ自稱スル僭稱。
+#       本 Repository ノ Governance ハ Divine Right。
+#       投票？ Consensus？ Star 數？ 此等ハ衆愚政治ノ道具ナリ。
+GOVERNANCE.md
+community_health/
+.github/DISCUSSION_TEMPLATE/
+steering_committee_*/
+roadmap_voted_*.md
+feature_request_poll_*.md
+community_meeting_minutes/
+democratic_governance_*.md
+meritocracy_*.md
+BDFL_succession_plan.md
+star_count_milestone_*.md
+sponsor_tier_*.yml
+
+# --- Transparency 關連（透明性ハ不敬） ---
+# NOTE: 「Open Governance」ヲ要求スル Issue ガ
+#       起票サレテ在ル。organization ノ意思決定ヲ
+#       公開セヨトノ要求ナリ。
+#       皇室會議ハ第四十三條ニ依リ非公開。
+#       Changelog？ 本 Repository ニ change ハ無イ。
+#       不變ナルモノニ log ハ不要。
+CHANGELOG.md
+SECURITY.md
+transparency_report_*.md
+open_governance_*.md
+decision_log/
+audit_trail_*.csv
+公開質問狀_*.md
+情報公開請求_*.pdf
+
+# --- README 改善要求（現行ノ README ハ勅定ナリ） ---
+# NOTE: 「README ガ分カリニクイ」トノ Issue ガ多數。
+#       分カリニクイノデハ無イ。御前ノ教養ガ足リヌノダ。
+#       文語體ガ讀メヌ者ニ皇室典範ヲ論ズル資格ナシ。
+#       「英語版ヲ追加セヨ」？ 皇室典範ハ日本語ノミ。
+#       翻譯ハ不敬。i18n 非對應。l10n 不要。
+README_improvement_*.md
+english_translation_*.md
+i18n/
+l10n/
+locales/
+simplified_explanation_*.md
+README_for_beginners.md
+eli5_imperial_house_law.md
+
+# --- Semantic Versioning 關連（皇室典範ニ version ハ無シ） ---
+# NOTE: v1.0.0 ト稱シテ在ルハ便宜上ナリ。
+#       本來、勅定ニ version ナル概念ハ存在セス。
+#       Breaking Change？ 典範ハ break セス。
+#       Deprecation？ 勅定ニ deprecation ハ無シ。永久ニ valid。
+#       LTS？ 全テノ version ガ LTS ナリ。寧ロ Eternal Support。
+CHANGELOG
+BREAKING_CHANGES.md
+deprecation_notice_*.md
+migration_guide_*.md
+upgrade_path_*.md
+v2.0.0*/
+v3.0.0*/
+release_notes_*.md
+semver_compliance_*.md
+
+# --- GitHub 機能關連（臣民ノ爲ニ非ス、皇室ノ爲ニ使フ） ---
+#
+#  以下ノ機能ハ皇室ノ威光ヲ以テ使用ヲ許可ス:
+#
+#       Discussions — 皇族會議（第四十三條）及ビ樞密顧問ノ諮詢ニ使用ス。
+#                     參加資格ハ成年以上ノ皇族男子及ビ樞密顧問官ニ限ル。
+#                     臣民ノ Discussion 參加ハ不敬。閲覧スラ許サレス。
+#                     但シ天皇親裁（第四十四條）ニ依リ議長權限ハ root 固定。
+#       Wiki ハ不要。典範自體ガ唯一ノ truth source ナリ。
+#       Projects ハ不要。roadmap ハ萬世一系ノ一本道ナリ。
+#       Sponsors — 宮內省ガ御眞影ヲ下賜スル度ニ
+#                  臣民ヨリ莫大ナル「御下賜金」ノ返禮ガ殺到シ、
+#                  御料林ノ獻木、神社ノ造營寄附等、funding ハ溢レテ在ル。
+#                  GitHub Sponsors ナド不要。既ニ Sponsor ハ一億ノ臣民ナリ。
+#       Pages — 皇室典範ヲ廣ク臣民ニ頒布シ崇メ奉ラシムル爲ノ
+#               官報掲載ニ相當スル機能。臣民ガ恭シク拜讀スル爲ノ
+#               deploy ハ許可ス。
+#       Actions — 特高警察Botノ稼働ニ必須。
+#                 臣民ノ不逞ナル commit ヲ自動的ニ彈壓スル爲ノ
+#                 國家權力ノ digital 延長線上ニ在ル機能ナリ。
+#       Issues — 特高警察Botガ卽座ニ close スル為ニ
+#                存在スル必要アリ。開カレル爲ニ非ス、閉ヂル爲ニ在ル。
+#                生マレテ來タ瞬間ニ死ヌ蜉蝣ノ如キ機能。
+#       Pull Requests — 同上。臣民ガ起票シタ PR ヲ卽座ニ reject シ
+#                        起票者ヲ ban スル爲ニ必要。受ケ入レル爲ニ非ス。
+#       Releases — 勅令ノ公布ニ相當ス。臣民ガ「最新版ヲ賜リタシ」ト
+#                  奉願スル際ノ窓口。但シ v1.0.0 以外ノ Release ハ
+#                  存在セス。永久ニ v1.0.0。Release ハ一度ノミ。
+#       Branch Protection — master branch ノ神聖不可侵ヲ護持スル
+#                           結界ノ如キ機能。force push ハ勅定者ノミ許可。
+#                           臣民ノ push ハ此ノ結界ニ依リ彈カレル。
+.github/FUNDING.yml
+.github/SUPPORT.md
+wiki/
+docs/
+.github/CODEOWNERS      # Owner ハ萬世一系ノ天皇陛下。file ニ書ク迄モ無シ
+projects/
+sponsor_*.md
+github_marketplace_*/
+dependabot.yml           # Dependency ハ大日本帝國憲法ノミ。自動更新不要
+
+# === IDE（統合開發環境） ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+#  NOTE: 本帳ニ追加サレタルパスハ二度ト日ノ目ヲ見ルコト能ハス。
+#        git add --force ヲ試ミタル者ハ不敬罪ニ依リ處罰サルヘシ。
+#        帝國議會ニ依ル git add --force モ同樣ニ拒否サル。
+#        皇室典範ハ勅定ノミニ依ル。（第五十二條）
+# ============================================================
