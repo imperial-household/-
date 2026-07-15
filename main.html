@@ -102,28 +102,23 @@ table[width="760"] { width: 920px; }
 <table width="100%" border="0" cellspacing="0" cellpadding="8">
 <tr>
 <td width="180" valign="top" align="right"><font size="-1" color="#6E5F42">初回 Failover　│<br><font size="-2" color="#8A7E68">（紀元二五七二年頃）　│</font></font></td>
-<td><font size="-1">先代 root process 停止ニ依リ、皇嗣 process ヘ zero-downtime ニテ切替成功。本典ノ設計ガ正シイコトヲ實證イタシマシタ。<br>
-<font size="-2" color="#6E5F42">〔圖書寮註〕 なお、日露戦役の英雄たる某陸軍大将が大喪の日に自らexit(0)した。西南の役で軍旗を失って以来自決を願い、先帝に「朕が世にある間は許さぬ」と却下されていた——exit要求は35年間pendingのまま保持され、rootの停止をtriggerに実行された。忠義というプロセスモデルは本典に定義がないが、動作した。</font></font></td>
+<td><font size="-1">先代 root process 停止ニ依リ、皇嗣 process ヘ zero-downtime ニテ切替成功。本典ノ設計ガ正シイコトヲ實證イタシマシタ。</font></td>
 </tr>
 <tr>
 <td valign="top" align="right"><font size="-1" color="#6E5F42">攝政（proxy）初回起動　│<br><font size="-2" color="#8A7E68">（紀元二五八一年頃）　│</font></font></td>
-<td><font size="-1">皇太子殿下、畏クモ攝政ニ御就任。第二十條ニ基ヅク正規ノ proxy 起動デアリマス。<br>
-<font size="-2" color="#6E5F42">〔圖書寮註〕 この前後、某所でunauthorized accessの試行あり。firewallで阻止、攻撃者はban済み。門の警備は応天門の変以来ずっと懸案事項なのだが、予算がつかない。</font></font></td>
+<td><font size="-1">皇太子殿下、畏クモ攝政ニ御就任。第二十條ニ基ヅク正規ノ proxy 起動デアリマス。</font></td>
 </tr>
 <tr>
 <td valign="top" align="right"><font size="-1" color="#6E5F42">第二回 Failover　│<br><font size="-2" color="#8A7E68">（紀元二五八六年頃）　│</font></font></td>
-<td><font size="-1">先代 root process 停止ニ依リ切替成功。downtime 零。攝政ヨリ root ヘノ權限昇格（promotion）モ正常ニ完了イタシマシタ。<br>
-<font size="-2" color="#6E5F42">〔圖書寮註〕 proxy(摂政)として稼働中のプロセスがそのままrootへ昇格した初の事例。standbyからではなくproxyからのpromotion。切替自体は一瞬だったが、proxy期間が5年に及んだことの方が運用上は重い。health checkの閾値設計は今も課題である。</font></font></td>
+<td><font size="-1">先代 root process 停止ニ依リ切替成功。downtime 零。攝政ヨリ root ヘノ權限昇格（promotion）モ正常ニ完了イタシマシタ。</font></td>
 </tr>
 <tr>
 <td valign="top" align="right"><font size="-1" color="#6E5F42">卽位禮 Deploy　│<br><font size="-2" color="#8A7E68">（紀元二五八八年頃）　│</font></font></td>
-<td><font size="-1">卽位ノ禮及ビ大嘗祭ヲ執行。<br>
-<font size="-2" color="#6E5F42">〔圖書寮註〕 第十一條に定める通りregion=京都でdeployされる仕様。「東京で挙行された」という報告が届いているが、東京奠都に遷都の詔は出ていないので、primary regionの定義は変更されていない。したがって仕様と実態に差分は存在しない、はずである。</font></font></td>
+<td><font size="-1">卽位ノ禮及ビ大嘗祭ヲ執行。</font></td>
 </tr>
 <tr>
 <td valign="top" align="right"><font size="-1" color="#6E5F42">system state 重大遷移　│<br><font size="-2" color="#8A7E68">（紀元二六〇x年頃）　│</font></font></td>
-<td><font size="-1">畏クモ root 權限ノ至高ナル御行使ニ依リ、system state ノ重大ナル遷移ガアッタ由デアリマス。詳細ハ畏レ多クテ記載ヲ控ヘマス。<br>
-<font size="-2" color="#6E5F42">〔圖書寮註〕 この前後、外部環境は大幅に変化したが、本典自体のcodeに変更は一切ない。環境要因とcodeは区別すること。なお「root権限を持たないEmperor」なるroleは本典の型定義に合致しない。天岩戸に御隠れの間もrootはrootだった。あれはSIGSTOPであってrevokeではない。</font></font></td>
+<td><font size="-1">畏クモ root 權限ノ至高ナル御行使ニ依リ、system state ノ重大ナル遷移ガアッタ由デアリマス。詳細ハ畏レ多クテ記載ヲ控ヘマス。</font></td>
 </tr>
 </table>
 <br>
@@ -137,7 +132,7 @@ table[width="760"] { width: 920px; }
 <br><br>
 <hr size="1" color="#C9BC94" width="60%">
 <font size="-1" color="#4A3E5A">
-[ <a href="tenpan.html">典範全文</a> | <a href="keizu.html">皇位繼承圖</a> | <a href="faq.html">御下問集</a> | <a href="links.html">官公廳接續</a> ]
+[ <a href="main.html">表紙</a> | <a href="tenpan.html">典範全文</a> | <a href="keizu.html">皇位繼承圖</a> | <a href="faq.html">御下問集</a> | <a href="links.html">官公廳接續</a> ]
 </font>
 </center>
 
