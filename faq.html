@@ -56,7 +56,7 @@ table[width="760"] { width: 920px; }
 <font size="-1">
 該當 Ticket ハ close 濟ミナリ。<br>
 validation ノ過程ニ於テ一部ノ元老 process ガ異議ヲ唱ヘタル形跡アルモ、最終的ニ畏クモ御裁可アリ。<br>
-close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。
+close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。<br>
 <font size="-2" color="#6E5F42">〔圖書寮註〕 婚姻ACLのvalidation基準は非公開。異議の内容も非公開。記録は残っているが開示APIはない。入内の家柄詮議で揉めるのは平安からの伝統で、揉めた記録だけが図書寮に積み上がっていく。</font>
 </font>
 <br><br>
@@ -67,7 +67,7 @@ close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。
 <font size="-1"><b>皇族ガ一度ニ大量ニ臣籍降下シタ場合、繼承候補ノ queue ガ枯渇スル虞ハ無イカ？</b></font><br><br>
 <font size="-1">
 本設計ニ於テ queue ノ枯渇ハ想定外ナリ。<br>
-多數ノ宮家ガ一夜ニシテ消滅スル等ノ事態ハ、如何ナル threat model ニモ含マレズ。杞憂ナリ。
+多數ノ宮家ガ一夜ニシテ消滅スル等ノ事態ハ、如何ナル threat model ニモ含マレズ。杞憂ナリ。<br>
 <font size="-2" color="#6E5F42">〔圖書寮註〕 「threat modelにない事態は起きない」は設計時の前提であって保証ではない。応仁の乱で都が丸焼けになるのも当時「想定外」だった。この手の話には既視感がある。</font>
 </font>
 <br><br>
@@ -78,7 +78,7 @@ close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。
 <font size="-1"><b>配偶者選定ニ際シ、臣民ガ週刊誌ヲ通ジテ候補者ヲ批評スルコトハ許サレルカ？</b></font><br><br>
 <font size="-1">
 本御下問ノ意圖、不明ナリ。<br>
-皇族ノ婚嫁ハ勅許ニ依ル（第四十條）。臣民ノ「世論」ナルモノハ本 API ニ定義ナシ。
+皇族ノ婚嫁ハ勅許ニ依ル（第四十條）。臣民ノ「世論」ナルモノハ本 API ニ定義ナシ。<br>
 <font size="-2" color="#6E5F42">〔圖書寮註〕 定義のないinputはparseされず、errorにもならない。単に読まれない。なお週刊誌より女房の噂の方が千年早くて千年正確だった、というのが当寮の観測である。</font>
 </font>
 <br><br>
@@ -89,7 +89,7 @@ close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。
 <font size="-1"><b>將來、男系男子ノ皇族ガ極端ニ減少シタ場合ノ contingency plan ハ如何？</b></font><br><br>
 <font size="-1">
 第七條ニ依リ最近親ノ皇族ニ傳フ。以上ナリ。<br>
-「減少」ナル假定自體、本典ノ前提（天壤無窮）ト兩立セズ。仕様上、杞憂トシテ處理サル。
+「減少」ナル假定自體、本典ノ前提（天壤無窮）ト兩立セズ。仕様上、杞憂トシテ處理サル。<br>
 <font size="-2" color="#6E5F42">〔圖書寮註〕 設計上の根拠: 5世遡って動作した実績がある(継体天皇)。動作保証の下限はこの前例が規定している。fallbackのfallbackを疑い出したらキリがない。</font>
 </font>
 <br><br>
@@ -101,7 +101,7 @@ close 濟ミ Ticket ノ reopen ハ不敬トシテ取扱ハル。
 <font size="-1">
 第五十八條ニ依リ不可ナリ。<br>
 臣籍ニ入リタル者ノ復歸經路（re-grant API）ハ存在セズ。deprovision 濟ミ process ヨリノ request ハ exit code 1 ナリ。<br>
-動畫配信ニテ泣クモ無駄ナリ。世迷ヒ言ハ .gitignore 對象。
+動畫配信ニテ泣クモ無駄ナリ。世迷ヒ言ハ .gitignore 對象。<br>
 <font size="-2" color="#6E5F42">〔圖書寮註〕 左遷のrevertが通らなかった前例なら菅原道真がいる。怨霊インシデントに発展しても、対応は天神様として祀るというworkaroundでcloseだった。revertとworkaroundは別の操作である。動画で怨霊にはなれまいし、静観する。</font>
 </font>
 <br><br>
